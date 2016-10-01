@@ -11,12 +11,12 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-24
-  - sys-img-x86-android-21
+#  - sys-img-x86-android-21
   - sys-img-x86-android-22
-  - sys-img-x86-android-23
-  - sys-img-x86-android-24
+#  - sys-img-x86-android-23
+#  - sys-img-x86-android-24
   - sys-img-x86-android-wear-23
-  - sys-img-x86-android-wear-24
+#  - sys-img-x86-android-wear-24
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
@@ -36,29 +36,29 @@ deploy:
     branch: master
 before_script:
   - android list targets
-  - echo no | android create avd --force -n mobile-21 -t android-21 --abi x86
-  - emulator -avd mobile-21 -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+#  - echo no | android create avd --force -n mobile-21 -t android-21 --abi x86
+#  - emulator -avd mobile-21 -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
   - android list targets
   - echo no | android create avd --force -n mobile-22 -t android-22 --abi x86
   - emulator -avd mobile-22 -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-  - echo no | android create avd --force -n mobile-23 -t android-23 --abi x86
-  - emulator -avd mobile-23 -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-  - echo no | android create avd --force -n mobile-24 -t android-24 --abi x86
-  - emulator -avd mobile-24 -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+#  - adb shell input keyevent 82 &
+#  - echo no | android create avd --force -n mobile-23 -t android-23 --abi x86
+#  - emulator -avd mobile-23 -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+#  - echo no | android create avd --force -n mobile-24 -t android-24 --abi x86
+#  - emulator -avd mobile-24 -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
   - echo no | android create avd --force -n wear-23 -t android-wear-23 --abi x86
   - emulator -avd wear-23 -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
-  - echo no | android create avd --force -n wear-24 -t android-wear-24 --abi x86
-  - emulator -avd wear-24 -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+#  - echo no | android create avd --force -n wear-24 -t android-wear-24 --abi x86
+#  - emulator -avd wear-24 -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
 after_script: ./gradlew assemble
