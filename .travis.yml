@@ -33,6 +33,7 @@ deploy:
   on:
     branch: master
 before_script:
+  - android list targets
   - echo no | android create avd --force -n mobile-22 -t android-22 --abi x86
   - emulator -avd mobile-22 -no-audio -no-window &
   - android-wait-for-emulator
