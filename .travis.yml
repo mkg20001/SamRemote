@@ -1,34 +1,29 @@
 language: android
 android:
   components:
-    # use the latest revision of Android SDK Tools
-    - platform-tools
-    - tools
-
-    # The BuildTools version used by your project
-    - build-tools-24.0.2
-
-    # The SDK version used to compile your project
-    - android-21
-    - android-23
-    - android-24 #workaround
-
-    # Additional components
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-android-m2repository
-    - addon-google_apis-google-24
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
-    # - sys-img-armeabi-v7a-android-22
-    # - sys-img-x86-android-17
+  - platform-tools
+  - tools
+  - build-tools-24.0.2
+  - android-21
+  - android-23
+  - android-24
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-24
 before_cache:
-  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-  - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
-  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
 jdk: oraclejdk8
+env:
+  secure: i5foP/MGmm0kjScuGqNIHAp8Tn7KlAg0sqHF2skBNJYsLoRcxDprXiHStzBcooGteRV01p0j0h91xqtbrjIrNgbmaBqEyd8c97PAz978F93dYGBOEtcglJ1/xV9IMZ3PiccV4ARJonEyw6dKvYctqOzFdM0rChA7l2Eeu9u2rVFGeb3s38MuCuVrQrpG+s6J7EGPpIf2YEisr7NisShKuSFrHXk55Fm/zyQOJn4BZknAs8oCTSyntoxsBEvx6F2XMfyzvOw10SPLkImmPYSK3LA2aU2FEhtKIhyX42Qmz6aCLTPiAZFKBnibXrF/l1XULHoVxX4zWMjvKE27igVqzwYDZvhUTpOvLhETrFGtYRKt7w/ghqH0Cz+gnAnDhvZR1+8lg0xWrs8A3LUm3Oa81q9nfGKFk4JhKfAia6TbHuDvraI9gO82cRl4uVPT5V491xpImI2NxsmurZXr73nFWFq8XCoJJIMPaWiYcNZ/FLbTExsvKmJ8dzgcpvScfIXHRVD5XFZcg/ivkIayY5OcB2GR5UzavofctsVcr/q8OZz+POlZMiRCmkxV5H4qbBIDlHti3S5tUegjLkW2KN2FL7EwZmp0ZD2ClmAWgQSzVEwfqCHIlwelquHg5A65r3uGqNUA+gvBI4Jo5RalTxKKZt6UXD0J0e7+ZMVIeEpUdq8=
+deploy:
+  provider: script
+  script: .travis/upload.sh
+  on:
+    branch: master
