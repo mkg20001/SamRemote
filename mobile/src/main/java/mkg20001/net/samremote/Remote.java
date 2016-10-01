@@ -34,21 +34,30 @@ import java.util.concurrent.TimeUnit;
 
 import mkg20001.net.samremotecommon.PushButton;
 import mkg20001.net.samremotecommon.RC;
+import mkg20001.net.samremotecommon.RemoteHelper;
+import mkg20001.net.samremotecommon.RemoteHelperView;
 import mkg20001.net.samremotecommon.Tools;
 
-public class Remote extends AppCompatActivity {
+public class Remote extends AppCompatActivity implements RemoteHelperView {
+
+    /* implements */
+    RC remote=null;
+    public RC getRemote() {
+        return remote;
+    }
+    Integer curState=0;
+    boolean isOffline=true;
+    @Override
+    public void setOffline(boolean s) {
+        isOffline=s;
+    }
 
     TextView state;
-    RC remote;
     FloatingActionButton stateIcon;
     EventEmitter event=new EventEmitter();
     Object keys=new Object();
     Integer target=Build.VERSION.SDK_INT;
     boolean mplus=target>=23;
-    Integer curState=0;
-    boolean isSearch=false;
-    //static final int AccessWifi = 3;
-    private boolean isOffline=true;
 
     private View.OnClickListener keyClick = new View.OnClickListener() {
         public void onClick(View v) {
@@ -83,13 +92,13 @@ public class Remote extends AppCompatActivity {
     DhcpInfo d;
     WifiManager wifii;
 
-    boolean ISDEBUGMODE=false;
+    boolean isDebug=false;
 
     private void checkForDebugMode() {
-        //ISDEBUGMODE = (Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) == null);
+        //isDebug = (Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) == null);
 
-        ISDEBUGMODE=false;
-        ISDEBUGMODE=Build.FINGERPRINT.startsWith("generic");
+        isDebug=false;
+        isDebug=Build.FINGERPRINT.startsWith("generic");
         //String androidID = ...;
         //if(androidID == null || androidID.equals("9774D56D682E549C"))
 
@@ -97,7 +106,7 @@ public class Remote extends AppCompatActivity {
         /*TelephonyManager man = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
         if(man != null){
             String devId = man.getDeviceSoftwareVersion();
-            ISDEBUGMODE = (devId == null);
+            isDebug = (devId == null);
         }*/
     }
 
@@ -124,6 +133,7 @@ public class Remote extends AppCompatActivity {
         event.on("startup", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
+                Tools.log("Startup...");
                 //Register RC
                 remote = new RC(getIPAddress(), getMACAddress(), Tools.getDeviceName(),event);
                 //Register buttons
@@ -169,6 +179,38 @@ public class Remote extends AppCompatActivity {
                 event.emit("search");
             }
         });
+        checkForDebugMode();
+        event.on("search.dialog", new EventListener() {
+            @Override
+            public void onEvent(java.lang.Object... objects) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // 1. Instantiate an AlertDialog.Builder with its constructor
+                        AlertDialog.Builder builder = new AlertDialog.Builder(Remote.this);
+
+                        // 2. Chain together various setter methods to set the dialog characteristics
+                        builder.setMessage(R.string.not_found)
+                                .setTitle(R.string.not_found_title);
+                        // Add the buttons
+                        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                //close
+                            }
+                        });
+                        builder.setNegativeButton(R.string.search, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                event.emit("search");
+                            }
+                        });
+
+                        // Create the AlertDialog
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
+                });
+            }
+        });
         event.on("state.change", new EventListener() {
             @Override
             public void onEvent(final java.lang.Object... objects) {
@@ -196,116 +238,8 @@ public class Remote extends AppCompatActivity {
                 }));
             }
         });
-        event.on("search", new EventListener() {
-            @Override
-            public void onEvent(java.lang.Object... objects) {
-                if (isSearch) {
-                    Tools.log("Already searching...");
-                    return;
-                }
-                new Thread(new Runnable() {
-                    private final TextView stat=state;
-                    private final FloatingActionButton icon=stateIcon;
-                    public void run() {
-                        isSearch=true;
-                        event.emit("state.change",R.drawable.loading,R.string.searching);
-                        isOffline=false; //we are looking for a tv
-                        String ips[];
-                        if (ISDEBUGMODE) {
-                            ips=new String[]{"127.0.0.1","192.168.178.25",getIP()}; //get last ip
-                            Tools.log("ISDEBUG!");
-                            Tools.log("ISDEBUG!");
-                            Tools.log("ISDEBUG!");
-                        } else {
-                            ips = new String[]{getIP()}; //get last ip
-                        }
-                        boolean found=false;
-                        lookfor:
-                        for (String tv:ips) {
-                            if (remote.connect(tv)) {
-                                found=true;
-                                //no need to save - loaded from file
-                                break lookfor;
-                            }
-                        }
-                        if (!found) {
-                            doScan();
-                            lookfor:
-                            for (java.lang.Object tv:Remote.this.ips.getItems()) {
-                                if (remote.connect((String) tv)) {
-                                    found=true;
-                                    saveIP((String) tv);
-                                    break lookfor;
-                                }
-                            }
-                        }
-                        final boolean f=found;
-                        Tools.log(f?"Connected!":"No host found...");
-                        runOnUiThread(new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (f) {
-                                    stat.setText(R.string.about);
-                                    event.emit("state.change",R.drawable.ok2,R.string.found);
-                                    final Integer cState=curState;
-                                    new Thread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            if (curState.compareTo(cState)<=0) {
-                                                try {
-                                                    Thread.sleep(2000);
-                                                } catch (InterruptedException e) {
-                                                    Tools.log("Can't delay");
-                                                }
-
-                                                Tools.log("C:"+curState.compareTo(cState)+":"+curState);
-                                                event.emit("state.change",R.drawable.ic_remote,R.string.about);
-                                                if (curState.compareTo(cState)<=1) {
-                                                    try {
-                                                        Thread.sleep(2000);
-                                                    } catch (InterruptedException e) {
-                                                        Tools.log("Can't delay");
-                                                    }
-                                                    Tools.log("C:"+curState.compareTo(cState)+":"+curState);
-                                                    event.emit("state.change",R.drawable.ic_remote,R.string.empty);
-                                                }
-                                                }
-                                        }
-                                    }).start();
-                                } else {
-                                    event.emit("state.change",R.drawable.error,R.string.not_found_title);
-                                    //no tv found=offline
-                                    isOffline=true;
-
-                                    // 1. Instantiate an AlertDialog.Builder with its constructor
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(Remote.this);
-
-                                    // 2. Chain together various setter methods to set the dialog characteristics
-                                    builder.setMessage(R.string.not_found)
-                                            .setTitle(R.string.not_found_title);
-                                    // Add the buttons
-                                    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            //close
-                                        }
-                                    });
-                                    builder.setNegativeButton(R.string.search, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int id) {
-                                            event.emit("search");
-                                        }
-                                    });
-
-                                    // Create the AlertDialog
-                                    AlertDialog dialog = builder.create();
-                                    dialog.show();
-                                }
-                                isSearch=false;
-                            }
-                        }));
-                    }
-                }).start();
-            }
-        });
+        new RemoteHelper(Remote.this,event);
+        Tools.log("Emit start?...");
         event.emit("startup");
     }
 
@@ -338,50 +272,11 @@ public class Remote extends AppCompatActivity {
             }
             return fileContents.toString();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return "";
+            Tools.log("No saved ip....");
+            return "127.0.0.1";
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
+            return "127.0.0.1";
         }
-    }
-
-    private static final int NB_THREADS = 25;
-    public Array ips=new Array();
-
-    public void doScan() {
-        ips.clear();
-        String LOG_TAG="loggg";
-        Log.i(LOG_TAG, "Start scanning");
-
-        ExecutorService executor = Executors.newFixedThreadPool(NB_THREADS);
-        for(int dest=0; dest<255; dest++) {
-            String host = "192.168.178." + dest;
-            executor.execute(pingRunnable(host));
-        }
-
-        Log.i(LOG_TAG, "Waiting for executor to terminate...");
-        executor.shutdown();
-        try { executor.awaitTermination(60*1000, TimeUnit.MILLISECONDS); } catch (InterruptedException ignored) { }
-
-        Log.i(LOG_TAG, "Scan finished");
-    }
-
-    private Runnable pingRunnable(final String host) {
-        return new Runnable() {
-            public void run() {
-                Tools.log( "Pinging " + host + "...");
-                try {
-                    InetAddress inet = InetAddress.getByName(host);
-                    boolean reachable = inet.isReachable(1000);
-                    if (reachable) ips.push(host);
-                    Tools.log( "=> Result: " + (reachable ? "reachable" : "not reachable"));
-                } catch (UnknownHostException e) {
-                    Log.e("SamRemote", "Not found", e);
-                } catch (IOException e) {
-                    Log.e("SamRemote", "IO Error", e);
-                }
-            }
-        };
     }
 }
