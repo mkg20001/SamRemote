@@ -11,12 +11,12 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-24
-  - sys-img-x86-android-21
-#  - sys-img-x86-android-22
-#  - sys-img-x86-android-23
-#  - sys-img-x86-android-24
-  - sys-img-x86-android-wear-23
-#  - sys-img-x86-android-wear-24
+  - sys-img-x86_64-android-21
+#  - sys-img-x86_64-android-22
+#  - sys-img-x86_64-android-23
+#  - sys-img-x86_64-android-24
+  - sys-img-x86_64-android-wear-23
+#  - sys-img-x86_64-android-wear-24
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
