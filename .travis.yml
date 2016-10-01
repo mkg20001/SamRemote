@@ -29,6 +29,7 @@ env:
 deploy:
   provider: script
   script: .travis/upload.sh
+  skip_cleanup: true
   on:
     branch: master
 before_script:
