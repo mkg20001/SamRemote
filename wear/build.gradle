@@ -9,6 +9,8 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -24,6 +26,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-wearable:9.6.1'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:multidex:+'
     compile project(':samremotecommon')
     //provided 'com.google.android.wearable:wearable:2.0.0-alpha2'
 }

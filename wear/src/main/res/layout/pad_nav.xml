@@ -26,7 +26,8 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -36,11 +37,10 @@
             app:srcCompat="@drawable/up"
             android:id="@+id/key_up"
             android:tint="@android:color/background_light"
-            app:backgroundTint="@android:color/transparent"
+            app:backgroundTint="@color/colorPrimary"
             app:elevation="0dp"
             android:layout_alignTop="@+id/bg"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="6dp" />
+            android:layout_centerHorizontal="true" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -50,11 +50,10 @@
             app:srcCompat="@drawable/right"
             android:id="@+id/key_right"
             android:tint="@android:color/background_light"
-            app:backgroundTint="@android:color/transparent"
+            app:backgroundTint="@color/colorPrimary"
             app:elevation="0dp"
             android:layout_alignTop="@+id/key_left"
-            android:layout_alignEnd="@+id/bg"
-            android:layout_marginStart="-6dp" />
+            android:layout_alignEnd="@+id/bg" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -65,10 +64,9 @@
             android:id="@+id/key_left"
             android:tint="@android:color/background_light"
             app:elevation="0dp"
-            app:backgroundTint="@android:color/transparent"
+            app:backgroundTint="@color/colorPrimary"
             android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/bg"
-            android:layout_marginStart="6dp" />
+            android:layout_alignStart="@+id/bg" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -78,21 +76,22 @@
             app:srcCompat="@drawable/down"
             android:id="@+id/key_down"
             android:tint="@android:color/background_light"
-            app:backgroundTint="@android:color/transparent"
+            app:backgroundTint="@color/colorPrimary"
             app:elevation="0dp"
             android:layout_alignBottom="@+id/bg"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="6dp" />
+            android:layout_centerHorizontal="true" />
 
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:clickable="false"
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
             app:srcCompat="@drawable/ok"
-            android:id="@+id/key_ok"
             android:tint="@android:color/background_light"
-            android:scaleType="fitCenter"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            android:id="@+id/key_ok"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 

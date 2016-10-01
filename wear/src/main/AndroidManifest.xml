@@ -13,6 +13,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        package="com.example.android.multidex.myapplication"
         android:theme="@style/AppTheme">
         <uses-library
             android:name="com.google.android.wearable"
