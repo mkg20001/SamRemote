@@ -27,3 +27,4 @@ deploy:
   script: .travis/upload.sh
   on:
     branch: master
+script: ./gradlew assemble
