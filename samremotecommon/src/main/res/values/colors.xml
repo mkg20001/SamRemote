@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#616161</color>
+    <color name="colorPrimaryDark">#424242</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="lightColor">#b3d4fc</color>
+    <color name="topBarColor">#607d8b</color>
+    <color name="blueBt">#536dfe</color>
+    <color name="lightBt">#d3d3d3</color>
+    <color name="bt">#808080</color>
+    <color name="powerBt">#ff0000</color>
+    <color name="mainBg">#5F5F5F</color>
+
+    <color name="light">@android:color/background_light</color>
+</resources>

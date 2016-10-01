@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name" translatable="false">Sam Remote</string>
+    <string name="searching">Looking for a Samsung TV...</string>
+    <string name="not_found">TV not found!\nIs the TV powered on?</string>
+    <string name="about">Control your Samsung TV</string>
+    <string name="not_found_title">Error: TV not found!</string>
+    <string name="ok">Ok</string>
+    <string name="search">Search Again</string>
+    <string name="cancel">Cancel</string>
+    <string name="found">Found TV!</string>
+    <string name="about_full">SamRemote is a Samsung Remote Control App for Samsung TVs\nDeveloped by Maciej Krüger\nUses the library NodeStyle\nSamsung is a registered Trademark of Samsung Inc.</string>
+    <string name="more">More</string>
+    <string name="empty" translatable="false"></string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_world">Hello World!</string>
+</resources>
