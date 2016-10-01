@@ -1,15 +1,7 @@
 package mkg20001.net.samremotecommon;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.widget.TextView;
-
 import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
-
-/**
- * Created by maciej on 01.10.16.
- */
 
 public class RemoteHelper {
     boolean isSearch=false;

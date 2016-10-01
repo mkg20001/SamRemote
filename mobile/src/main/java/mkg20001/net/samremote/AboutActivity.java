@@ -8,10 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-/**
- * Created by maciej on 25.09.16.
- */
-
 public class AboutActivity extends AppCompatActivity {
     Integer target= Build.VERSION.SDK_INT;
     boolean mplus=target>=23;

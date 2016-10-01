@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     repositories {
         jcenter()
@@ -10,6 +9,21 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+}
+
+plugins {
+    id "com.github.hierynomus.license" version "0.13.1"
+}
+
+license {
+    header rootProject.file('HEADER')
+    strictCheck true
+    mapping {
+        javascript='JAVADOC_STYLE'
+    }
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
+    ext.name = 'Maciej Krüger'
+    ext.email = 'mkg20001@gmail.com'
 }
 
 allprojects {

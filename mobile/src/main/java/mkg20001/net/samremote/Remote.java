@@ -13,24 +13,17 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
-import net.nodestyle.helper.Array;
 import net.nodestyle.helper.Object;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import mkg20001.net.samremotecommon.PushButton;
 import mkg20001.net.samremotecommon.RC;
