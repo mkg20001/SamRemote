@@ -1,4 +1,4 @@
-package mkg20001.net.samremote;
+package mkg20001.net.samremotecommon;
 
 import android.os.Build;
 import android.util.Base64;

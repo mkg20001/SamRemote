@@ -1,4 +1,4 @@
-package mkg20001.net.samremote;
+package mkg20001.net.samremotecommon;
 
 import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;

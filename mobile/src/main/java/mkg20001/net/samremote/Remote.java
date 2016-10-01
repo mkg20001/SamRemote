@@ -32,6 +32,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import mkg20001.net.samremotecommon.PushButton;
+import mkg20001.net.samremotecommon.RC;
+import mkg20001.net.samremotecommon.Tools;
+
 public class Remote extends AppCompatActivity {
 
     TextView state;
