@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.DhcpInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -18,12 +17,6 @@ import android.widget.TextView;
 
 import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
-import net.nodestyle.helper.Object;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import mkg20001.net.samremotecommon.PushButton;
 import mkg20001.net.samremotecommon.RC;
@@ -38,6 +31,9 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
     public RC getRemote() {
         return remote;
     }
+    public boolean getDebug() {
+        return isDebug;
+    }
     Integer curState=0;
     boolean isOffline=true;
     @Override
@@ -48,7 +44,6 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
     TextView state;
     FloatingActionButton stateIcon;
     EventEmitter event=new EventEmitter();
-    Object keys=new Object();
     Integer target=Build.VERSION.SDK_INT;
     boolean mplus=target>=23;
 
@@ -75,32 +70,12 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
         return info.getMacAddress();
     }
 
-    public String   s_dns1 ;
-    public String   s_dns2;
-    public String   s_gateway;
-    public String   s_ipAddress;
-    public String   s_leaseDuration;
-    public String   s_netmask;
-    public String   s_serverAddress;
-    DhcpInfo d;
-    WifiManager wifii;
-
     boolean isDebug=false;
 
     private void checkForDebugMode() {
-        //isDebug = (Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID) == null);
-
         isDebug=false;
-        isDebug=Build.FINGERPRINT.startsWith("generic");
-        //String androidID = ...;
-        //if(androidID == null || androidID.equals("9774D56D682E549C"))
-
-
-        /*TelephonyManager man = (TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if(man != null){
-            String devId = man.getDeviceSoftwareVersion();
-            isDebug = (devId == null);
-        }*/
+        isDebug=Build.FINGERPRINT.startsWith("Android/sdk_")||Build.FINGERPRINT.startsWith("generic");
+        if (isDebug) Tools.log("Debug Mode (Emulator Mode)");
     }
 
     @Override
@@ -138,20 +113,6 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                         b.setOnClickListener(keyClick);
                     }
                 }
-
-                wifii= (WifiManager) getSystemService(Context.WIFI_SERVICE);
-                d=wifii.getDhcpInfo();
-
-                s_dns1="DNS 1: "+String.valueOf(d.dns1);
-                s_dns2="DNS 2: "+String.valueOf(d.dns2);
-                s_gateway="Default Gateway: "+String.valueOf(d.gateway);
-                s_ipAddress="IP Address: "+String.valueOf(d.ipAddress);
-                s_leaseDuration="Lease Time: "+String.valueOf(d.leaseDuration);
-                s_netmask="Subnet Mask: "+String.valueOf(d.netmask);
-                s_serverAddress="Server IP: "+String.valueOf(d.serverAddress);
-
-                //display them
-                Tools.log("Network Info\n"+s_dns1+"\n"+s_dns2+"\n"+s_gateway+"\n"+s_ipAddress+"\n"+s_leaseDuration+"\n"+s_netmask+"\n"+s_serverAddress);
 
                 //Power
                 new PushButton(R.id.key_poweroff,"poweroff",event);
@@ -237,39 +198,10 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
     }
 
     public void saveIP(String ip) {
-        String FILENAME = "last_ip";
-        FileOutputStream fos;
-        try {
-            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-            fos.write(ip.getBytes());
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Remote.this.getPreferences(Context.MODE_PRIVATE).edit().putString("last_ip", ip).commit();
     }
 
     public String getIP() {
-        FileInputStream fis;
-        try {
-            fis = openFileInput("last_ip");
-            StringBuilder fileContents = new StringBuilder("");
-
-            byte[] buffer = new byte[1024];
-
-            int n;
-            while ((n = fis.read(buffer)) != -1)
-            {
-                fileContents.append(new String(buffer, 0, n));
-            }
-            return fileContents.toString();
-        } catch (FileNotFoundException e) {
-            Tools.log("No saved ip....");
-            return "127.0.0.1";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "127.0.0.1";
-        }
+        return Remote.this.getPreferences(Context.MODE_PRIVATE).getString("last_ip", "127.0.0.1");
     }
 }

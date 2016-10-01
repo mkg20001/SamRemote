@@ -4,23 +4,176 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
+    android:theme="@style/AppTheme"
     android:layout_height="match_parent"
     tools:context="mkg20001.net.samremote.Remote"
     tools:deviceIds="wear">
 
-    <TextView
-        android:id="@+id/text"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/app_name"
-        app:layout_box="all" />
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp"
+        tools:context="mkg20001.net.samremote.Remote"
+        android:id="@+id/main">
 
-    <TextView
-        android:id="@+id/clock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:textColor="@android:color/white"
-        app:layout_box="all" />
+        <include layout="@layout/pad_nav"
+            android:id="@+id/nav" />
+
+        <TextView
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:textColor="@android:color/white"
+            app:layout_box="all" />
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/topBarColor"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/state" />
+
+        <!--android:foreground="@drawable/ic_remote"!-->
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+
+        <!--             app:srcCompat="@android:drawable/ic_lock_power_off" !-->
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_source"
+            android:id="@+id/key_hdmi"
+            android:tint="@android:color/background_light"
+            android:layout_above="@+id/key_source"
+            android:layout_alignStart="@+id/key_source" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_source"
+            android:id="@+id/key_source"
+            android:tint="@android:color/background_light"
+            android:layout_above="@+id/toolbar3"
+            android:layout_alignParentEnd="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/menu"
+            android:id="@+id/key_menu"
+            android:tint="@android:color/background_light"
+            android:layout_below="@+id/key_hdmi"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:text="@string/about"
+            android:id="@+id/state"
+            android:padding="0dp"
+            android:layout_below="@+id/key_poweroff"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ok2"
+            android:id="@+id/key_enter"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="?attr/colorPrimary"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/toolbar3"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/back"
+            android:id="@+id/key_back"
+            app:backgroundTint="?attr/colorPrimary"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/toolbar3"
+            android:layout_toStartOf="@+id/key_enter" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_exit"
+            android:id="@+id/key_exit"
+            app:backgroundTint="?attr/colorPrimary"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/toolbar3"
+            android:layout_toEndOf="@+id/key_enter" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            android:id="@+id/key_poweroff"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/powerBt"
+            app:srcCompat="@android:drawable/ic_lock_power_off"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/stateFAB" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_chlist"
+            android:id="@+id/key_chlist"
+            android:tint="@android:color/background_light"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/key_poweroff" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            android:id="@+id/stateFAB"
+            android:tint="@android:color/background_light"
+            android:saveEnabled="true"
+            tools:ignore="RelativeOverlap"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/key_back"
+            app:backgroundTint="@color/topBarColor"
+            app:elevation="0dp" />
+
+    </RelativeLayout>
 
 </android.support.wearable.view.BoxInsetLayout>

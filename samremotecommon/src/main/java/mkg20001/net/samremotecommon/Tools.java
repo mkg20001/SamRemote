@@ -61,22 +61,21 @@ public class Tools {
     private static final int NB_THREADS = 25;
     public static Array ips=new Array();
 
-    public static String[] doScan() {
+    public static String[] doScan(String subnet) {
         ips.clear();
-        String LOG_TAG="loggg";
-        Log.i(LOG_TAG, "Start scanning");
+        Tools.log("Start scanning on subnet "+subnet);
 
         ExecutorService executor = Executors.newFixedThreadPool(NB_THREADS);
         for(int dest=0; dest<255; dest++) {
-            String host = "192.168.178." + dest;
+            String host = subnet + dest;
             executor.execute(pingRunnable(host));
         }
 
-        Log.i(LOG_TAG, "Waiting for executor to terminate...");
+        Tools.log("Waiting for executor to terminate...");
         executor.shutdown();
         try { executor.awaitTermination(60*1000, TimeUnit.MILLISECONDS); } catch (InterruptedException ignored) { }
 
-        Log.i(LOG_TAG, "Scan finished");
+        Tools.log("Scan finished");
 
         String[] res=new String[ips.length];
 

@@ -4,7 +4,8 @@ public interface RemoteHelperView {
     Integer curState=0;
     void saveIP(String ip);
     String getIP();
-    boolean isDebug=false;
+    boolean getDebug();
     void setOffline(boolean s);
+    String getIPAddress();
     RC getRemote();
 }

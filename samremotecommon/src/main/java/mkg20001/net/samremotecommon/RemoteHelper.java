@@ -8,6 +8,7 @@ public class RemoteHelper {
     RemoteHelperView rh;
     RC remote=null;
     EventEmitter event;
+    String subnet=null;
     public RemoteHelper(RemoteHelperView r,EventEmitter e) {
         this.rh=r;
         this.event=e;
@@ -26,12 +27,19 @@ public class RemoteHelper {
                         event.emit("state.change",R.drawable.loading,R.string.searching);
 
                         rh.setOffline(false); //we are looking for a tv
+                        if (subnet==null) {
+                            String[] sp=rh.getIPAddress().split("\\.");
+                            try {
+                                subnet=sp[0]+"."+sp[1]+"."+sp[2]+".";
+                            } catch(Exception e) {
+                                Tools.log("Using default subnet...");
+                                subnet="192.169.178.";
+                            }
+                            Tools.log("Using subnet "+subnet);
+                        }
                         String ips[];
-                        if (rh.isDebug) {
-                            ips=new String[]{"127.0.0.1","192.168.178.25",rh.getIP()}; //get last ip
-                            Tools.log("ISDEBUG!");
-                            Tools.log("ISDEBUG!");
-                            Tools.log("ISDEBUG!");
+                        if (rh.getDebug()) {
+                            ips=new String[]{"127.0.0.1","192.168.178.25",rh.getIP()}; //hardcode the ip - won't work with ping
                         } else {
                             ips = new String[]{rh.getIP()}; //get last ip
                         }
@@ -45,7 +53,7 @@ public class RemoteHelper {
                             }
                         }
                         if (!found) {
-                            ips=Tools.doScan();
+                            ips=Tools.doScan(subnet);
                             lookfor:
                             for (String tv:ips) {
                                 if (remote.connect(tv)) {
