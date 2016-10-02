@@ -112,6 +112,29 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                 return true;
             }
         });
+
+
+        final View padVolch=findViewById(R.id.volch);
+        final View padNav=findViewById(R.id.nav);
+        padVolch.setVisibility(View.INVISIBLE);
+
+        findViewById(R.id.key_ok).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                padNav.setVisibility(View.INVISIBLE);
+                padVolch.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
+        findViewById(R.id.key_change).setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                padNav.setVisibility(View.VISIBLE);
+                padVolch.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
+
         event.on("startup", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
@@ -119,7 +142,13 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                 //Register RC
                 remote = new RC(getIPAddress(), getMACAddress(), Tools.getDeviceName(),event);
                 //Register buttons
-                for (Integer i:new Integer[]{R.id.key_back,R.id.key_chlist,R.id.key_down,R.id.key_enter,R.id.key_exit,R.id.key_hdmi,R.id.key_left,R.id.key_menu,R.id.key_ok,R.id.key_poweroff,R.id.key_right,R.id.key_source,R.id.key_up}) {
+                for (Integer i:new Integer[]{
+                        R.id.key_poweroff,
+                        R.id.key_left,R.id.key_right,R.id.key_down,R.id.key_up,R.id.key_ok,
+                        R.id.key_volup,R.id.key_voldown,R.id.key_chup,R.id.key_chdown,
+                        R.id.key_enter,R.id.key_back,R.id.key_exit,
+                        R.id.key_menu,R.id.key_hdmi,R.id.key_source
+                }) {
                     View b=findViewById(i);
                     if (b==null) {
                         Tools.log("KEY ERROR - IS ZERO: "+i);
@@ -136,6 +165,11 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                 new PushButton(R.id.key_down,"down",event);
                 new PushButton(R.id.key_up,"up",event);
                 new PushButton(R.id.key_ok,"enter",event);
+                //Vol/CH
+                new PushButton(R.id.key_volup,"volup",event);
+                new PushButton(R.id.key_voldown,"voldown",event);
+                new PushButton(R.id.key_chup,"chup",event);
+                new PushButton(R.id.key_chdown,"chdown",event);
                 //Main
                 new PushButton(R.id.key_enter,"enter",event);
                 new PushButton(R.id.key_back,"return",event);

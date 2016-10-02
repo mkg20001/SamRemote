@@ -22,6 +22,9 @@
         <include layout="@layout/pad_nav"
             android:id="@+id/nav" />
 
+        <include layout="@layout/pad_volch"
+            android:id="@+id/volch" />
+
         <TextView
             android:id="@+id/clock"
             android:layout_width="wrap_content"

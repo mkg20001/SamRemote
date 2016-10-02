@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:theme="@style/AppTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mkg20001.net.samremote.Remote"
+    tools:deviceIds="wear">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="0dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="0dp"
+        tools:context="mkg20001.net.samremote.Remote"
+        android:id="@+id/main">
+
+        <ImageView
+            app:srcCompat="@drawable/main_bg"
+            android:id="@+id/bg"
+            android:scaleType="fitCenter"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="invisible" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/arrow_up"
+            android:id="@+id/key_chup"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/bg"
+            android:layout_centerHorizontal="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_volup"
+            android:id="@+id/key_volup"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/key_voldown"
+            android:layout_alignEnd="@+id/bg" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_down"
+            android:id="@+id/key_voldown"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            app:backgroundTint="@color/colorPrimary"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/bg" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/arrow_down"
+            android:id="@+id/key_chdown"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            android:layout_alignBottom="@+id/bg"
+            android:layout_centerHorizontal="true" />
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ok"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="0dp"
+            android:id="@+id/key_change"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+</android.support.wearable.view.BoxInsetLayout>

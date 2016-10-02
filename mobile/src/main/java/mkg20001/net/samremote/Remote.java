@@ -105,7 +105,13 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                 //Register RC
                 remote = new RC(getIPAddress(), getMACAddress(), Tools.getDeviceName(),event);
                 //Register buttons
-                for (Integer i:new Integer[]{R.id.key_back,R.id.key_chlist,R.id.key_down,R.id.key_enter,R.id.key_exit,R.id.key_hdmi,R.id.key_chup,R.id.key_menu,R.id.key_ok,R.id.key_poweroff,R.id.key_right,R.id.key_source,R.id.key_up,R.id.key_volup,R.id.key_voldown,R.id.key_chup,R.id.key_chdown}) {
+                for (Integer i:new Integer[]{
+                        R.id.key_poweroff,
+                        R.id.key_left,R.id.key_right,R.id.key_down,R.id.key_up,R.id.key_ok,
+                        R.id.key_volup,R.id.key_voldown,R.id.key_chup,R.id.key_chdown,
+                        R.id.key_enter,R.id.key_back,R.id.key_exit,
+                        R.id.key_menu,R.id.key_hdmi,R.id.key_source
+                }) {
                     View b=findViewById(i);
                     if (b==null) {
                         Tools.log("KEY ERROR - IS ZERO: "+i);
@@ -117,7 +123,7 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                 //Power
                 new PushButton(R.id.key_poweroff,"poweroff",event);
                 //Dir
-                new PushButton(R.id.key_chup,"left",event);
+                new PushButton(R.id.key_left,"left",event);
                 new PushButton(R.id.key_right,"right",event);
                 new PushButton(R.id.key_down,"down",event);
                 new PushButton(R.id.key_up,"up",event);
