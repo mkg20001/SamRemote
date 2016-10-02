@@ -11,8 +11,8 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-24
-  - sys-img-armeabi-v7a-android-21
-  - sys-img-armeabi-v7a-android-wear-23
+#  - sys-img-armeabi-v7a-android-21
+#  - sys-img-armeabi-v7a-android-wear-23
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
@@ -23,8 +23,6 @@ cache:
   - "$HOME/.gradle/wrapper/"
 jdk: oraclejdk8
 env:
-  global:
-     - ADB_INSTALL_TIMEOUT=8
   secure: i5foP/MGmm0kjScuGqNIHAp8Tn7KlAg0sqHF2skBNJYsLoRcxDprXiHStzBcooGteRV01p0j0h91xqtbrjIrNgbmaBqEyd8c97PAz978F93dYGBOEtcglJ1/xV9IMZ3PiccV4ARJonEyw6dKvYctqOzFdM0rChA7l2Eeu9u2rVFGeb3s38MuCuVrQrpG+s6J7EGPpIf2YEisr7NisShKuSFrHXk55Fm/zyQOJn4BZknAs8oCTSyntoxsBEvx6F2XMfyzvOw10SPLkImmPYSK3LA2aU2FEhtKIhyX42Qmz6aCLTPiAZFKBnibXrF/l1XULHoVxX4zWMjvKE27igVqzwYDZvhUTpOvLhETrFGtYRKt7w/ghqH0Cz+gnAnDhvZR1+8lg0xWrs8A3LUm3Oa81q9nfGKFk4JhKfAia6TbHuDvraI9gO82cRl4uVPT5V491xpImI2NxsmurZXr73nFWFq8XCoJJIMPaWiYcNZ/FLbTExsvKmJ8dzgcpvScfIXHRVD5XFZcg/ivkIayY5OcB2GR5UzavofctsVcr/q8OZz+POlZMiRCmkxV5H4qbBIDlHti3S5tUegjLkW2KN2FL7EwZmp0ZD2ClmAWgQSzVEwfqCHIlwelquHg5A65r3uGqNUA+gvBI4Jo5RalTxKKZt6UXD0J0e7+ZMVIeEpUdq8=
 deploy:
   provider: script
@@ -32,14 +30,15 @@ deploy:
   skip_cleanup: true
   on:
     branch: master
-before_script:
-  - android list targets
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
-  - echo no | android create avd --force -n test2 -t android-23 --abi android-wear/armeabi-v7a
-  - emulator -avd test2 -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+before_script: true
+#  - android list targets
+#  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+#  - emulator -avd test -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+#  - echo no | android create avd --force -n test2 -t android-23 --abi android-wear/armeabi-v7a
+#  - emulator -avd test2 -no-audio -no-window &
+#  - android-wait-for-emulator
+#  - adb shell input keyevent 82 &
+script: true
 after_script: ./gradlew assemble
