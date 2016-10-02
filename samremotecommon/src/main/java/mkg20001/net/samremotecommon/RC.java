@@ -25,6 +25,7 @@ class VerifyKey {
             "play","pause","ff","rewind","ff_","rewind_", //media
             "enter","exit","return", //controls
             "hdmi","source","menu","chlist", //tv stuff
+            "volup","voldown","chup","chdown", //vol/ch
             "poweroff","poweron" //main keys
     };
     public static boolean verify(String k) {

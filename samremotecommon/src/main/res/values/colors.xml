@@ -12,5 +12,10 @@
     <color name="powerBt">#ff0000</color>
     <color name="mainBg">#5F5F5F</color>
 
+    <color name="bgLight">#8D8D8D</color>
+    <color name="bgLightStroke">#7D7D7D</color>
+    <color name="bgDark">#3C3C3C</color>
+    <color name="bgDarkStroke">#2C2C2C</color>
+
     <color name="light">@android:color/background_light</color>
 </resources>

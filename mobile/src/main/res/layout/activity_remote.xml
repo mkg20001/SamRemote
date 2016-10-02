@@ -145,8 +145,7 @@
             android:id="@+id/key_menu"
             android:tint="@android:color/background_light"
             android:layout_marginBottom="41dp"
-            android:layout_above="@+id/toolbar3"
-            android:layout_alignStart="@+id/key_left" />
+            android:layout_above="@+id/toolbar3" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -173,6 +172,94 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/key_menu"
             android:contentDescription="Return" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/side_bg"
+            android:id="@+id/imageView2"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/state"
+            android:layout_alignEnd="@+id/key_back"
+            android:padding="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/side_bg"
+            android:id="@+id/side_left"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/state"
+            android:layout_alignEnd="@+id/key_back"
+            android:padding="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/side_bg"
+            android:id="@+id/side_right"
+            android:padding="16dp"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/state"
+            android:layout_alignStart="@+id/key_exit" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/arrow_down"
+            android:id="@+id/key_chdown"
+            app:backgroundTint="@color/bgLight"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/key_voldown"
+            android:layout_alignStart="@+id/key_poweroff" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_down"
+            android:layout_marginTop="27dp"
+            android:id="@+id/key_voldown"
+            app:backgroundTint="@color/bgLight"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            android:layout_below="@+id/key_volup"
+            android:layout_alignStart="@+id/key_volup" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/arrow_up"
+            android:id="@+id/key_chup"
+            app:backgroundTint="@color/bgLight"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            android:layout_above="@+id/key_voldown"
+            android:layout_alignStart="@+id/key_chdown" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/key_volup"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="91dp"
+            android:id="@+id/key_volup"
+            app:backgroundTint="@color/bgLight"
+            android:tint="@android:color/background_light"
+            app:elevation="0dp"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_alignStart="@+id/textView" />
 
     </RelativeLayout>
 
