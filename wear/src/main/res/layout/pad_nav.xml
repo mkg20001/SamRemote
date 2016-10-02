@@ -20,7 +20,7 @@
         android:id="@+id/main">
 
         <ImageView
-            app:srcCompat="@mipmap/main_bg"
+            app:srcCompat="@drawable/main_bg"
             android:id="@+id/bg"
             android:scaleType="fitCenter"
             android:layout_width="128dp"
