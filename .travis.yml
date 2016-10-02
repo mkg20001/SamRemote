@@ -27,8 +27,7 @@ deploy:
   on:
     branch: master
 before_script: true
-script: true
-after_script: "./gradlew assemble"
+script: "./gradlew clean build"
 env:
   global:
     secure: br/q4aRjALtHvOMPRcmbUkA3tJxmcLeHjhGH3mxLOMHPSCAcV411xfP0HAWf/lUEJjRvmIKwy+yxkFL9yzzzJS+DmvFDhOXvHzvTwxJLKF+2g0aeR+c6BY/223Ai/I9wP6C8FW5aiL/O6ULer+fO8ikPaqaWzVRQb5KHVK5BChg5mjlcuVhDEtigNyLZft4Yhe041k+UAHoVDT73ONAZ6Rhsvk0MhkXXKAj1L8VC517rNEM4I0VF/VjFpKNOr4f1flwskOSXbHaXHejTOm5jdK1IA67TlGPmv/AFnBnBfCj/eG1sspcj9eahVnOVqIIRiSw+k49dBpCNkippF4wdaioDIpu9Lt1pHTk2l8ouWJFBLkVWINApznE2mGuNEq1u5dvDYvaxMiSZbTJaGjEWZmPBwynXjUNBQQOd53AcYZPBUp8djemEy5QSZpUZ4Ck3d1qn8e69TVrFIodoedqo6u+DVZ+6CPxTf2tFW0QLKmhy70qeHIP7ZLmQ0g7TgCAIM89mcMm/G5Hcb3Cnre0jcKQbDW52RuwMIwBbtS2oi1O3n0wGA71jKvvH5/o3OqAN5HhT+/pndtD3oqn5y4vB14JUla8TFYKuL02AST7bDRWpwdinXK3CZlsAr+xx2RvjyTpa3FSCW7YhMToVl+ZsY5h6EDdlbcv/Ui57uXAIrq8=
