@@ -1,7 +1,7 @@
 # SamRemote
-Another Samsung Remote Control App
+Control your Samsung TV with SamRemote
 
-Allows you to Control your Samsung TV over WiFi
+Note: This App uses WiFI *NOT IR*
 
 ## Buttons
 Navigation: Up, Down, Left, Right
