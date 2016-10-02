@@ -11,8 +11,6 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-24
-#  - sys-img-armeabi-v7a-android-21
-#  - sys-img-armeabi-v7a-android-wear-23
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
@@ -22,23 +20,15 @@ cache:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
 jdk: oraclejdk8
-env:
-  secure: i5foP/MGmm0kjScuGqNIHAp8Tn7KlAg0sqHF2skBNJYsLoRcxDprXiHStzBcooGteRV01p0j0h91xqtbrjIrNgbmaBqEyd8c97PAz978F93dYGBOEtcglJ1/xV9IMZ3PiccV4ARJonEyw6dKvYctqOzFdM0rChA7l2Eeu9u2rVFGeb3s38MuCuVrQrpG+s6J7EGPpIf2YEisr7NisShKuSFrHXk55Fm/zyQOJn4BZknAs8oCTSyntoxsBEvx6F2XMfyzvOw10SPLkImmPYSK3LA2aU2FEhtKIhyX42Qmz6aCLTPiAZFKBnibXrF/l1XULHoVxX4zWMjvKE27igVqzwYDZvhUTpOvLhETrFGtYRKt7w/ghqH0Cz+gnAnDhvZR1+8lg0xWrs8A3LUm3Oa81q9nfGKFk4JhKfAia6TbHuDvraI9gO82cRl4uVPT5V491xpImI2NxsmurZXr73nFWFq8XCoJJIMPaWiYcNZ/FLbTExsvKmJ8dzgcpvScfIXHRVD5XFZcg/ivkIayY5OcB2GR5UzavofctsVcr/q8OZz+POlZMiRCmkxV5H4qbBIDlHti3S5tUegjLkW2KN2FL7EwZmp0ZD2ClmAWgQSzVEwfqCHIlwelquHg5A65r3uGqNUA+gvBI4Jo5RalTxKKZt6UXD0J0e7+ZMVIeEpUdq8=
 deploy:
-  provider: script
-  script: .travis/upload.sh
+- provider: script
+  script: bash .travis/upload.sh
   skip_cleanup: true
   on:
     branch: master
 before_script: true
-#  - android list targets
-#  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-#  - emulator -avd test -no-audio -no-window &
-#  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
-#  - echo no | android create avd --force -n test2 -t android-23 --abi android-wear/armeabi-v7a
-#  - emulator -avd test2 -no-audio -no-window &
-#  - android-wait-for-emulator
-#  - adb shell input keyevent 82 &
 script: true
-after_script: ./gradlew assemble
+after_script: "./gradlew assemble"
+env:
+  global:
+    secure: br/q4aRjALtHvOMPRcmbUkA3tJxmcLeHjhGH3mxLOMHPSCAcV411xfP0HAWf/lUEJjRvmIKwy+yxkFL9yzzzJS+DmvFDhOXvHzvTwxJLKF+2g0aeR+c6BY/223Ai/I9wP6C8FW5aiL/O6ULer+fO8ikPaqaWzVRQb5KHVK5BChg5mjlcuVhDEtigNyLZft4Yhe041k+UAHoVDT73ONAZ6Rhsvk0MhkXXKAj1L8VC517rNEM4I0VF/VjFpKNOr4f1flwskOSXbHaXHejTOm5jdK1IA67TlGPmv/AFnBnBfCj/eG1sspcj9eahVnOVqIIRiSw+k49dBpCNkippF4wdaioDIpu9Lt1pHTk2l8ouWJFBLkVWINApznE2mGuNEq1u5dvDYvaxMiSZbTJaGjEWZmPBwynXjUNBQQOd53AcYZPBUp8djemEy5QSZpUZ4Ck3d1qn8e69TVrFIodoedqo6u+DVZ+6CPxTf2tFW0QLKmhy70qeHIP7ZLmQ0g7TgCAIM89mcMm/G5Hcb3Cnre0jcKQbDW52RuwMIwBbtS2oi1O3n0wGA71jKvvH5/o3OqAN5HhT+/pndtD3oqn5y4vB14JUla8TFYKuL02AST7bDRWpwdinXK3CZlsAr+xx2RvjyTpa3FSCW7YhMToVl+ZsY5h6EDdlbcv/Ui57uXAIrq8=
