@@ -107,8 +107,8 @@ public class Remote extends WearableActivity implements RemoteHelperView {
             @Override
             public boolean onLongClick(View v) {
                 if (isOffline) return false;
-                /*Intent intent = new Intent(Remote.this, AboutActivity.class);
-                startActivity(intent);*/
+                Intent intent = new Intent(Remote.this, AboutActivity.class);
+                startActivity(intent);
                 return true;
             }
         });
