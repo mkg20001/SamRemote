@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
@@ -7,7 +8,7 @@
     <TextView
         style="@style/HeadingFont"
         android:text="@string/app_name"
-        android:background="@color/colorPrimary"
+        android:background="@color/topBarColor"
         android:layout_marginTop="0sp"
         android:padding="16sp"/>
 
@@ -15,5 +16,14 @@
         style="@style/BodyFont"
         android:text="@string/about"
         android:textColor="@color/colorPrimaryDark"/>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:srcCompat="@drawable/ok2"
+        android:id="@+id/key2_enter"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:tint="@android:color/background_dark"
+        android:scaleType="fitCenter" />
 
 </LinearLayout>

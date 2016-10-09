@@ -7,13 +7,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import net.nodestyle.events.EventEmitter;
 
+import mkg20001.net.samremotecommon.PushButton;
+import mkg20001.net.samremotecommon.Tools;
+
 public class QSDialog
         extends DialogFragment {
-
-    public static final String TILE_STATE_KEY = "tileState";
 
     private Context _context;
     private QSDialogListener _listener;
@@ -49,8 +51,7 @@ public class QSDialog
             QSDialog dialog = new QSDialog()
                     .setContext(this._context)
                     .setEvent(event)
-                    .setClickListener(this._listener)
-                    .initAll();
+                    .setClickListener(this._listener);
             return dialog;
         }
     }
@@ -68,13 +69,12 @@ public class QSDialog
     public Dialog onCreateDialog(Bundle savedState){
 
         // Read the saved state data passed in.
-        boolean isTileActive = false;
+        /*boolean isTileActive = false;
         if (savedState.containsKey(TILE_STATE_KEY)) {
             isTileActive = savedState.getBoolean(TILE_STATE_KEY);
-        }
+        }*/
 
-        int actionButtonText = isTileActive ?
-                R.string.app_name : R.string.searching;
+        int actionButtonText = R.string.ok;
 
         AlertDialog.Builder alertBuilder =
                 new AlertDialog.Builder(this._context);
@@ -84,14 +84,14 @@ public class QSDialog
 
                 // OnAttach doesn't get called on the dialog;
                 // we have to apply our click event handlers here.
-                .setNegativeButton(R.string.cancel,
+                /*.setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Log.d("QS", "Dialog cancel");
                                 _listener.onDialogNegativeClick(QSDialog.this);
                             }
-                        })
+                        })*/
                 .setPositiveButton(actionButtonText,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -102,7 +102,7 @@ public class QSDialog
                             }
                         });
 
-        return  alertBuilder.create();
+        return initAll(alertBuilder.create());
     }
 
     private QSDialog setClickListener(QSDialogListener listener) {
@@ -119,9 +119,53 @@ public class QSDialog
         this._context = context;
         return this;
     }
-    
-    private QSDialog initAll() {
-        // TODO: 09.10.16 init buttons 
-        return this;
+
+    private View.OnClickListener keyClick = new View.OnClickListener() {
+        public void onClick(View v) {
+            event.emit("keyclick."+v.getId());
+            event.emit("keyclick",v);
+        }
+    };
+
+    private Dialog initAll(Dialog d) {
+        // TODO: 09.10.16 init buttons
+        for (Integer i:new Integer[]{
+                /*R.id.key_poweroff,
+                R.id.key_left,R.id.key_right,R.id.key_down,R.id.key_up,R.id.key_ok,
+                R.id.key_volup,R.id.key_voldown,R.id.key_chup,R.id.key_chdown,
+                R.id.key_enter,R.id.key_back,R.id.key_exit,
+                R.id.key_menu,R.id.key_hdmi,R.id.key_source*/
+                R.id.key2_enter
+        }) {
+            View b=d.findViewById(i);
+            if (b==null) {
+                Tools.log("KEY ERROR - IS ZERO: "+i);
+            } else {
+                b.setOnClickListener(keyClick);
+            }
+        }
+
+        /*//Power
+        new PushButton(R.id.key_poweroff,"poweroff",event);
+        //Dir
+        new PushButton(R.id.key_left,"left",event);
+        new PushButton(R.id.key_right,"right",event);
+        new PushButton(R.id.key_down,"down",event);
+        new PushButton(R.id.key_up,"up",event);
+        new PushButton(R.id.key_ok,"enter",event);
+        //Vol/CH
+        new PushButton(R.id.key_volup,"volup",event);
+        new PushButton(R.id.key_voldown,"voldown",event);
+        new PushButton(R.id.key_chup,"chup",event);
+        new PushButton(R.id.key_chdown,"chdown",event);*/
+        //Main
+        new PushButton(R.id.key2_enter,"enter",event);
+        /*new PushButton(R.id.key_back,"return",event);
+        new PushButton(R.id.key_exit,"exit",event);
+        //Special
+        new PushButton(R.id.key_menu,"menu",event);
+        new PushButton(R.id.key_hdmi,"hdmi",event);
+        new PushButton(R.id.key_source,"source",event);*/
+        return d;
     }
 }

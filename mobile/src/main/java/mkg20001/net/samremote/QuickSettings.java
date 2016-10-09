@@ -3,9 +3,7 @@ package mkg20001.net.samremote;
 import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -13,16 +11,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.text.format.Formatter;
-import android.view.View;
-import android.widget.TextView;
 
 import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
 
-import mkg20001.net.samremotecommon.PushButton;
 import mkg20001.net.samremotecommon.RC;
 import mkg20001.net.samremotecommon.RemoteHelper;
 import mkg20001.net.samremotecommon.RemoteHelperView;
@@ -118,32 +111,7 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         event.on("search.dialog", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
-                /*runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        // 1. Instantiate an AlertDialog.Builder with its constructor
-                        AlertDialog.Builder builder = new AlertDialog.Builder(Remote.this);
-
-                        // 2. Chain together various setter methods to set the dialog characteristics
-                        builder.setMessage(R.string.not_found)
-                                .setTitle(R.string.not_found_title);
-                        // Add the buttons
-                        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //close
-                            }
-                        });
-                        builder.setNegativeButton(R.string.search, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                event.emit("search");
-                            }
-                        });
-
-                        // Create the AlertDialog
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }
-                });*/
+                //Dialog has to be created in Dialog
             }
         });
         event.on("state.change", new EventListener() {
@@ -157,7 +125,11 @@ public class QuickSettings extends TileService implements RemoteHelperView {
                 Tools.log("Icon set to "+objects[0]);
                 int id=(int) objects[1];
                 tile.setLabel(getString(id));
-                tile.setState(isOffline?Tile.STATE_INACTIVE:Tile.STATE_ACTIVE);
+                if (isOn) {
+                    tile.setState(isOffline?Tile.STATE_INACTIVE:Tile.STATE_ACTIVE);
+                } else {
+                    tile.setState(Tile.STATE_INACTIVE);
+                }
                 tile.updateTile();
                 curState++;
             }
@@ -174,26 +146,15 @@ public class QuickSettings extends TileService implements RemoteHelperView {
     @Override
     public void onStartListening() {
         init();
+        if (!isOn) event.emit("state.change",R.drawable.ic_remote_svg,R.string.app_name);
         log("Start listening");
-        if (isOffline) {
-            log("LOL");
-            event.emit("search");
-            event.once("search.done", new EventListener() {
-                @Override
-                public void onEvent(Object... objects) {
-                    //init();
-                }
-            });
-        } else {
-            log("GG");
-            //init();
-        }
     }
 
     /**
      * Called when the user taps the tile.
      */
     Boolean isOn=false;
+    Boolean isClick=false;
 
     @Override
     public void onClick(){
@@ -201,7 +162,10 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         // Get the tile's current state.
         //Tile tile = getQsTile();
         //isTileActive = (tile.getState() == Tile.STATE_ACTIVE);
-
+        if (isClick) log("Ignore onClick - Already running");
+        if (isClick) return;
+        isClick=true;
+        log("Click Event");
         EventListener e=new EventListener() {
             @Override
             public void onEvent(Object... objects) {
@@ -212,7 +176,7 @@ public class QuickSettings extends TileService implements RemoteHelperView {
                         .setClickListener(new QSDialog.QSDialogListener() {
                             @Override
                             public void onDialogPositiveClick(DialogFragment dialog) {
-                                log("Positive registed");
+                                log("Positive");
 
                                 // The user wants to change the tile state.
                                 //isTileActive = !isTileActive;
@@ -221,7 +185,7 @@ public class QuickSettings extends TileService implements RemoteHelperView {
 
                             @Override
                             public void onDialogNegativeClick(DialogFragment dialog) {
-                                log("Negative registered");
+                                log("Negative");
 
                                 // The user is cancelled the dialog box.
                                 // We can't do anything to the dialog box here,
@@ -239,13 +203,35 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         };
 
         if (isOn&&isOffline) {
+            log("Offline - Turn Off");
+            event.emit("state.change",R.drawable.ic_remote_svg,R.string.app_name);
             isOn=false;
         } else if (isOn&&!isOffline) {
+            log("Show Dialog");
             e.onEvent();
         } else if (!isOn) {
             //turn on
-
+            if (isOffline) {
+                log("Search...");
+                event.emit("search");
+                event.once("search.done", new EventListener() {
+                    @Override
+                    public void onEvent(Object... objects) {
+                        if ((Boolean) objects[0]) {
+                            log("Online!");
+                            isOn=true;
+                        } else {
+                            log("Still Offline!");
+                            isOn=false;
+                        }
+                    }
+                });
+            } else {
+                log("Already Online!");
+                isOn=true;
+            }
         }
+        isClick=false;
     }
 
     /**
@@ -308,21 +294,4 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         // Need to call updateTile for the tile to pick up changes.
         tile.updateTile();*/
     }
-
-    // Access storage to see how many times the tile
-    // has been tapped.
-    /*private boolean getServiceStatus() {
-
-        SharedPreferences prefs =
-                getApplicationContext()
-                        .getSharedPreferences(PREFERENCES_KEY,
-                                MODE_PRIVATE);
-
-        boolean isActive = prefs.getBoolean(SERVICE_STATUS_FLAG, false);
-        isActive = !isActive;
-
-        prefs.edit().putBoolean(SERVICE_STATUS_FLAG, isActive).apply();
-
-        return isActive;
-    }*/
 }

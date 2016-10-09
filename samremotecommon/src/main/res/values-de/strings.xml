@@ -14,4 +14,6 @@
     <string name="hello_world">Hallo Welt!</string>
     <string name="action_settings">Einstellungen</string>
     <string name="offline">Offline</string>
+    <string name="searching_">Suchen...</string>
+    <string name="not_found_short">Nicht Gefunden!</string>
 </resources>
