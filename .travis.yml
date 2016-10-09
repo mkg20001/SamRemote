@@ -19,6 +19,8 @@ cache:
   directories:
   - "$HOME/.gradle/caches/"
   - "$HOME/.gradle/wrapper/"
+  - "$HOME/.android/"
+  - "$HOME/.Android/"
 jdk: oraclejdk8
 deploy:
 - provider: script
