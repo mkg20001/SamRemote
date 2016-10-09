@@ -10,4 +10,8 @@
     <string name="found">Fernseher gefunden!</string>
     <string name="about_full">SamRemote ist eine Samsung Fernsteuerungs App für Samsung Fernseher\nEntwickelt von Maciej Krüger\nNutzt die NodeStyle Bibliothek\nSamsung ist eine eingetrragene Marke der Samsung Inc</string>
     <string name="more">Mehr</string>
+    <string name="remote_online">Fernbedinung verbunden</string>
+    <string name="hello_world">Hallo Welt!</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="offline">Offline</string>
 </resources>

@@ -49,7 +49,7 @@ class InvalidKey extends Exception {
 
 public class RC {
     //Connect & Control the TV
-    boolean connected=false;
+    public boolean connected=false;
     EventEmitter event;
     String ip;
     String mac;

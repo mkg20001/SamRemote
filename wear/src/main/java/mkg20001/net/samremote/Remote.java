@@ -232,7 +232,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                 }));
             }
         });
-        new RemoteHelper(Remote.this,event);
+        new RemoteHelper(Remote.this,event,isDebug);
         Tools.log("Emit start?...");
         event.emit("startup");
     }

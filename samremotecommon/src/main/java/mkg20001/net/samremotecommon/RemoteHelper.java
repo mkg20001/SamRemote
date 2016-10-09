@@ -9,9 +9,22 @@ public class RemoteHelper {
     RC remote=null;
     EventEmitter event;
     String subnet=null;
-    public RemoteHelper(RemoteHelperView r,EventEmitter e) {
+    Boolean ping=false;
+    Boolean isQS=false;
+    public RemoteHelper(RemoteHelperView r,EventEmitter e,Boolean s,Boolean isQS) {
+        this.isQS=isQS;
+        ping=!s; //isDebug = true => !true=false
         this.rh=r;
         this.event=e;
+        m();
+    }
+    public RemoteHelper(RemoteHelperView r,EventEmitter e,Boolean s) {
+        ping=!s; //isDebug = true => !true=false
+        this.rh=r;
+        this.event=e;
+        m();
+    }
+    private void m() {
         event.on("search", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
@@ -39,7 +52,7 @@ public class RemoteHelper {
                         }
                         String ips[];
                         if (rh.getDebug()) {
-                            ips=new String[]{"127.0.0.1","192.168.178.25",rh.getIP()}; //hardcode the ip - won't work with ping
+                            ips=new String[]{"127.0.0.1"}; //hardcode the ip - won't work with ping
                         } else {
                             ips = new String[]{rh.getIP()}; //get last ip
                         }
@@ -53,7 +66,7 @@ public class RemoteHelper {
                             }
                         }
                         if (!found) {
-                            ips=Tools.doScan(subnet);
+                            ips=ping?Tools.doScan(subnet):new String[0];
                             lookfor:
                             for (String tv:ips) {
                                 if (remote.connect(tv)) {
@@ -65,6 +78,7 @@ public class RemoteHelper {
                         }
                         final boolean f=found;
                         Tools.log(f?"Connected!":"No host found...");
+                        event.emit("search.done",f);
                         if (f) {
                             event.emit("state.change",R.drawable.ok2,R.string.found);
                             final Integer cState=rh.curState;
@@ -76,21 +90,23 @@ public class RemoteHelper {
                                 }
 
                                 Tools.log("C:"+rh.curState.compareTo(cState)+":"+rh.curState);
-                                event.emit("state.change",R.drawable.ic_remote,R.string.about);
-                                if (rh.curState.compareTo(cState)<=1) {
-                                    try {
-                                        Thread.sleep(2000);
-                                    } catch (InterruptedException e) {
-                                        Tools.log("Can't delay");
+                                event.emit("state.change",R.drawable.ic_remote,isQS?R.string.remote_online:R.string.about);
+                                if (!isQS) {
+                                    if (rh.curState.compareTo(cState)<=1) {
+                                        try {
+                                            Thread.sleep(2000);
+                                        } catch (InterruptedException e) {
+                                            Tools.log("Can't delay");
+                                        }
+                                        Tools.log("C:"+rh.curState.compareTo(cState)+":"+rh.curState);
+                                        event.emit("state.change",R.drawable.ic_remote,R.string.empty);
                                     }
-                                    Tools.log("C:"+rh.curState.compareTo(cState)+":"+rh.curState);
-                                    event.emit("state.change",R.drawable.ic_remote,R.string.empty);
                                 }
                             }
                         } else {
-                            event.emit("state.change",R.drawable.error,R.string.not_found_title);
                             //no tv found=offline
                             rh.setOffline(true);
+                            event.emit("state.change",isQS?R.drawable.ic_remote:R.drawable.error,isQS?R.string.offline:R.string.not_found_title);
 
                             event.emit("search.dialog");
                         }

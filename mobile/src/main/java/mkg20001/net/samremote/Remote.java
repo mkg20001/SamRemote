@@ -1,8 +1,10 @@
 package mkg20001.net.samremote;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -62,6 +64,11 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
     public String getIPAddress() {
         WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
         return Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private void setIcon(FloatingActionButton icon, Drawable draw) {
+        icon.setForeground(draw);
     }
 
     public String getMACAddress() {
@@ -184,35 +191,40 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                     private final FloatingActionButton icon=stateIcon;
                     @Override
                     public void run() {
-                        //icon.setForeground(getResources().getDrawable((int) objects[0])); min:23
                         if (!mplus) {
-                            if (((Integer) objects[0]).toString().equalsIgnoreCase(((Integer) R.drawable.ic_remote).toString()))
+                            if (objects[0].toString().equalsIgnoreCase(((Integer) R.drawable.ic_remote).toString()))
                                 objects[0] = R.drawable.ic_remote_svg; //fix ugly icon
                         }
                         Drawable draw=getResources().getDrawable((int) objects[0]);
                         if (mplus) {
-                            icon.setForeground(draw);
+                            setIcon(icon,draw);
                         } else {
                             icon.setImageDrawable(draw);
                         }
                         Tools.log("Image set to "+objects[0]);
-                        stat.setText((int) objects[1]);
+                        int id=(int) objects[1];
+                        stat.setText(id);
                         icon.setColorFilter(R.color.light);
                         curState++;
                     }
                 }));
             }
         });
-        new RemoteHelper(Remote.this,event);
-        Tools.log("Emit start?...");
+        new RemoteHelper(Remote.this,event,isDebug);
+        Tools.log("Emit start...");
         event.emit("startup");
     }
 
+    public SharedPreferences getPref() {
+        Context context = Remote.this;
+        return context.getSharedPreferences("mkg20001.net.samremote.settings", Context.MODE_PRIVATE);
+    }
+
     public void saveIP(String ip) {
-        Remote.this.getPreferences(Context.MODE_PRIVATE).edit().putString("last_ip", ip).commit();
+        getPref().edit().putString("last_ip", ip).commit();
     }
 
     public String getIP() {
-        return Remote.this.getPreferences(Context.MODE_PRIVATE).getString("last_ip", "127.0.0.1");
+        return getPref().getString("last_ip", "127.0.0.1");
     }
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HeadingFont" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="BodyFont" parent="@style/HeadingFont">
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginTop">8sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="LinkFont" parent="@style/BodyFont">
+        <item name="android:textColor">@color/colorTextHyperlink</item>
+    </style>
+</resources>
