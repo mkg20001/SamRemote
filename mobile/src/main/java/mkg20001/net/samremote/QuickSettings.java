@@ -23,30 +23,27 @@ import mkg20001.net.samremotecommon.Tools;
 
 import static mkg20001.net.samremotecommon.Tools.log;
 
-/**
- * Created by maciej on 09.10.16.
- */
 @TargetApi(Build.VERSION_CODES.N)
 public class QuickSettings extends TileService implements RemoteHelperView {
 
     /* implements */
-    RC remote=null;
+    private RC remote=null;
     public RC getRemote() {
         return remote;
     }
     public boolean getDebug() {
         return isDebug;
     }
-    Integer curState=0;
-    boolean isOffline=true;
+    private Integer curState=0;
+    private boolean isOffline=true;
     @Override
     public void setOffline(boolean s) {
         isOffline=s;
     }
 
-    Boolean firstRun=true;
+    private Boolean firstRun=true;
 
-    public SharedPreferences getPref() {
+    private SharedPreferences getPref() {
         Context context = QuickSettings.this;
         return context.getSharedPreferences("mkg20001.net.samremote.settings", Context.MODE_PRIVATE);
     }
@@ -56,21 +53,21 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         return Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
     }
 
-    public String getMACAddress() {
+    private String getMACAddress() {
         WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
         return info.getMacAddress();
     }
 
     public void saveIP(String ip) {
-        getPref().edit().putString("last_ip", ip).commit();
+        getPref().edit().putString("last_ip", ip).apply();
     }
 
     public String getIP() {
         return getPref().getString("last_ip", "127.0.0.1");
     }
 
-    boolean isDebug=false;
+    private boolean isDebug=false;
 
     private void checkForDebugMode() {
         isDebug=false;
@@ -78,10 +75,10 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         if (isDebug) Tools.log("Debug Mode (Emulator Mode)");
     }
 
-    EventEmitter event=new EventEmitter();
+    private final EventEmitter event=new EventEmitter();
     /**
      * Called when the tile is added to the Quick Settings.
-     * @return TileService constant indicating tile state
+     * TileService constant indicating tile state
      */
 
     @Override
@@ -90,14 +87,14 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         init();
     }
 
-    public void init() {
+    private void init() {
         if (firstRun) {
             firstRun=false;
             once();
         }
     }
 
-    public void once() {
+    private void once() {
         event.on("startup", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
@@ -153,8 +150,8 @@ public class QuickSettings extends TileService implements RemoteHelperView {
     /**
      * Called when the user taps the tile.
      */
-    Boolean isOn=false;
-    Boolean isClick=false;
+    private Boolean isOn=false;
+    private Boolean isClick=false;
 
     @Override
     public void onClick(){
@@ -180,7 +177,6 @@ public class QuickSettings extends TileService implements RemoteHelperView {
 
                                 // The user wants to change the tile state.
                                 //isTileActive = !isTileActive;
-                                updateTile();
                             }
 
                             @Override
@@ -206,10 +202,10 @@ public class QuickSettings extends TileService implements RemoteHelperView {
             log("Offline - Turn Off");
             event.emit("state.change",R.drawable.ic_remote_svg,R.string.app_name);
             isOn=false;
-        } else if (isOn&&!isOffline) {
+        } else if (isOn) {
             log("Show Dialog");
             e.onEvent();
-        } else if (!isOn) {
+        } else {
             //turn on
             if (isOffline) {
                 log("Search...");
@@ -248,50 +244,5 @@ public class QuickSettings extends TileService implements RemoteHelperView {
     @Override
     public void onTileRemoved() {
         log("Tile removed");
-    }
-
-    // Changes the appearance of the tile.
-    private void updateTile() {
-
-        /*Tile tile = this.getQsTile();
-        boolean isActive = getServiceStatus();
-
-        Icon newIcon;
-        String newLabel;
-        int newState;
-
-        // Change the tile to match the service status.
-        if (isActive) {
-
-            newLabel = String.format(Locale.US,
-                    "%s %s",
-                    getString(R.string.tile_label),
-                    getString(R.string.service_active));
-
-            newIcon = Icon.createWithResource(getApplicationContext(),
-                    ic_android_black_24dp);
-
-            newState = Tile.STATE_ACTIVE;
-
-        } else {
-            newLabel = String.format(Locale.US,
-                    "%s %s",
-                    getString(R.string.tile_label),
-                    getString(R.string.service_inactive));
-
-            newIcon =
-                    Icon.createWithResource(getApplicationContext(),
-                            android.R.drawable.ic_dialog_alert);
-
-            newState = Tile.STATE_INACTIVE;
-        }
-
-        // Change the UI of the tile.
-        tile.setLabel(newLabel);
-        tile.setIcon(newIcon);
-        tile.setState(newState);
-
-        // Need to call updateTile for the tile to pick up changes.
-        tile.updateTile();*/
     }
 }

@@ -27,32 +27,31 @@ public class QSDialog
      */
     public static class Builder {
 
-        private Context _context;
+        private final Context _context;
         private QSDialogListener _listener;
         private EventEmitter event;
 
-        public Builder(Context context){
+        Builder(Context context){
             this._context = context;
         }
 
-        public Builder setClickListener(QSDialogListener listener) {
-            if (listener instanceof QSDialogListener) {
+        Builder setClickListener(QSDialogListener listener) {
+            if (listener != null) {
                 this._listener = listener;
             }
             return this;
         }
 
-        public Builder setEvent(EventEmitter e) {
+        Builder setEvent(EventEmitter e) {
             this.event=e;
             return this;
         }
 
-        public QSDialog create() {
-            QSDialog dialog = new QSDialog()
+        QSDialog create() {
+            return new QSDialog()
                     .setContext(this._context)
                     .setEvent(event)
                     .setClickListener(this._listener);
-            return dialog;
         }
     }
 
@@ -120,7 +119,7 @@ public class QSDialog
         return this;
     }
 
-    private View.OnClickListener keyClick = new View.OnClickListener() {
+    private final View.OnClickListener keyClick = new View.OnClickListener() {
         public void onClick(View v) {
             event.emit("keyclick."+v.getId());
             event.emit("keyclick",v);

@@ -9,6 +9,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
@@ -39,31 +40,31 @@ public class Remote extends WearableActivity implements RemoteHelperView {
     private TextView mClockView;
 
     /* implements */
-    RC remote=null;
+    private RC remote=null;
     public RC getRemote() {
         return remote;
     }
     public boolean getDebug() {
         return isDebug;
     }
-    Integer curState=0;
-    boolean isOffline=true;
+    private Integer curState=0;
+    private boolean isOffline=true;
     @Override
     public void setOffline(boolean s) {
         isOffline=s;
     }
 
-    TextView state;
-    FloatingActionButton stateIcon;
-    EventEmitter event=new EventEmitter();
+    private TextView state;
+    private FloatingActionButton stateIcon;
+    private final EventEmitter event=new EventEmitter();
 
-    private View.OnClickListener keyClick = new View.OnClickListener() {
+    private final View.OnClickListener keyClick = new View.OnClickListener() {
         public void onClick(View v) {
             event.emit("keyclick."+v.getId());
             event.emit("keyclick",v);
         }
     };
-    private View.OnClickListener stateClick = new View.OnClickListener() {
+    private final View.OnClickListener stateClick = new View.OnClickListener() {
         public void onClick(View v) {
             if (isOffline) event.emit("search");
         }
@@ -74,13 +75,13 @@ public class Remote extends WearableActivity implements RemoteHelperView {
         return Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
     }
 
-    public String getMACAddress() {
+    private String getMACAddress() {
         WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
         return info.getMacAddress();
     }
 
-    boolean isDebug=false;
+    private boolean isDebug=false;
 
     private void checkForDebugMode() {
         isDebug=false;
@@ -222,7 +223,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                     @Override
                     public void run() {
                         //icon.setForeground(getResources().getDrawable((int) objects[0])); min:23
-                        Drawable draw=getResources().getDrawable((int) objects[0]);
+                        Drawable draw= ContextCompat.getDrawable(Remote.this,(int) objects[0]);
                         icon.setForeground(draw);
                         Tools.log("Image set to "+objects[0]);
                         stat.setText((int) objects[1]);
@@ -238,7 +239,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
     }
 
     public void saveIP(String ip) {
-        Remote.this.getPreferences(Context.MODE_PRIVATE).edit().putString("last_ip", ip).commit();
+        Remote.this.getPreferences(Context.MODE_PRIVATE).edit().putString("last_ip", ip).apply();
     }
 
     public String getIP() {

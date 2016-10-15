@@ -12,11 +12,9 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:paddingTop="0dp"
-        tools:context="mkg20001.net.samremote.Remote"
-        android:id="@+id/main">
+        tools:context="mkg20001.net.samremote.Remote">
 
-        <include layout="@layout/pad_nav"
-            android:id="@+id/nav" />
+        <include layout="@layout/pad_nav" />
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -131,7 +129,6 @@
             android:clickable="true"
             app:fabSize="normal"
             app:srcCompat="@drawable/key_chlist"
-            android:id="@+id/key_chlist"
             android:tint="@android:color/background_light"
             android:layout_alignTop="@+id/key_menu"
             android:layout_centerHorizontal="true" />
@@ -188,7 +185,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/side_bg"
-            android:id="@+id/side_left"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@+id/state"
@@ -199,7 +195,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/side_bg"
-            android:id="@+id/side_right"
             android:padding="16dp"
             android:layout_alignTop="@+id/imageView2"
             android:layout_alignParentEnd="true"

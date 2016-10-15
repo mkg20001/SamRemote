@@ -12,8 +12,7 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:paddingTop="0dp"
-        tools:context="mkg20001.net.samremote.Remote"
-        android:id="@+id/main">
+        tools:context="mkg20001.net.samremote.Remote">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -32,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="13dp"
-            android:id="@+id/textView3"
             android:textAppearance="@android:style/TextAppearance.Material.Large"
             android:layout_alignBottom="@+id/toolbar"
             android:layout_alignParentStart="true"

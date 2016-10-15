@@ -11,6 +11,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
@@ -29,33 +30,33 @@ import mkg20001.net.samremotecommon.Tools;
 public class Remote extends AppCompatActivity implements RemoteHelperView {
 
     /* implements */
-    RC remote=null;
+    private RC remote=null;
     public RC getRemote() {
         return remote;
     }
     public boolean getDebug() {
         return isDebug;
     }
-    Integer curState=0;
-    boolean isOffline=true;
+    private Integer curState=0;
+    private boolean isOffline=true;
     @Override
     public void setOffline(boolean s) {
         isOffline=s;
     }
 
-    TextView state;
-    FloatingActionButton stateIcon;
-    EventEmitter event=new EventEmitter();
-    Integer target=Build.VERSION.SDK_INT;
-    boolean mplus=target>=23;
+    private TextView state;
+    private FloatingActionButton stateIcon;
+    private final EventEmitter event=new EventEmitter();
+    private final Integer target=Build.VERSION.SDK_INT;
+    private final boolean mplus=target>=23;
 
-    private View.OnClickListener keyClick = new View.OnClickListener() {
+    private final View.OnClickListener keyClick = new View.OnClickListener() {
         public void onClick(View v) {
             event.emit("keyclick."+v.getId());
             event.emit("keyclick",v);
         }
     };
-    private View.OnClickListener stateClick = new View.OnClickListener() {
+    private final View.OnClickListener stateClick = new View.OnClickListener() {
         public void onClick(View v) {
             if (isOffline) event.emit("search");
         }
@@ -71,13 +72,13 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
         icon.setForeground(draw);
     }
 
-    public String getMACAddress() {
+    private String getMACAddress() {
         WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         WifiInfo info = manager.getConnectionInfo();
         return info.getMacAddress();
     }
 
-    boolean isDebug=false;
+    private boolean isDebug=false;
 
     private void checkForDebugMode() {
         isDebug=false;
@@ -195,7 +196,7 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                             if (objects[0].toString().equalsIgnoreCase(((Integer) R.drawable.ic_remote).toString()))
                                 objects[0] = R.drawable.ic_remote_svg; //fix ugly icon
                         }
-                        Drawable draw=getResources().getDrawable((int) objects[0]);
+                        Drawable draw= ContextCompat.getDrawable(Remote.this,(int) objects[0]);
                         if (mplus) {
                             setIcon(icon,draw);
                         } else {
@@ -215,13 +216,13 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
         event.emit("startup");
     }
 
-    public SharedPreferences getPref() {
+    private SharedPreferences getPref() {
         Context context = Remote.this;
         return context.getSharedPreferences("mkg20001.net.samremote.settings", Context.MODE_PRIVATE);
     }
 
     public void saveIP(String ip) {
-        getPref().edit().putString("last_ip", ip).commit();
+        getPref().edit().putString("last_ip", ip).apply();
     }
 
     public String getIP() {

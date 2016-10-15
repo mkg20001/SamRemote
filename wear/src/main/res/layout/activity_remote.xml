@@ -16,8 +16,7 @@
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
         android:paddingTop="0dp"
-        tools:context="mkg20001.net.samremote.Remote"
-        android:id="@+id/main">
+        tools:context="mkg20001.net.samremote.Remote">
 
         <include layout="@layout/pad_nav"
             android:id="@+id/nav" />
@@ -158,7 +157,6 @@
             android:clickable="true"
             app:fabSize="mini"
             app:srcCompat="@drawable/key_chlist"
-            android:id="@+id/key_chlist"
             android:tint="@android:color/background_light"
             android:layout_alignParentTop="true"
             android:layout_toEndOf="@+id/key_poweroff" />

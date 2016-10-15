@@ -4,13 +4,13 @@ import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
 
 public class RemoteHelper {
-    boolean isSearch=false;
-    RemoteHelperView rh;
-    RC remote=null;
-    EventEmitter event;
-    String subnet=null;
-    Boolean ping=false;
-    Boolean isQS=false;
+    private boolean isSearch=false;
+    private final RemoteHelperView rh;
+    private RC remote=null;
+    private final EventEmitter event;
+    private String subnet=null;
+    private Boolean ping=false;
+    private Boolean isQS=false;
     public RemoteHelper(RemoteHelperView r,EventEmitter e,Boolean s,Boolean isQS) {
         this.isQS=isQS;
         ping=!s; //isDebug = true => !true=false
@@ -58,12 +58,11 @@ public class RemoteHelper {
                             ips = new String[]{rh.getIP()}; //get last ip
                         }
                         boolean found=false;
-                        lookfor:
                         for (String tv:ips) {
                             if (remote.connect(tv)) {
                                 found=true;
                                 //no need to save - loaded from file
-                                break lookfor;
+                                break;
                             }
                         }
                         if (!found) {
@@ -81,25 +80,25 @@ public class RemoteHelper {
                         Tools.log(f?"Connected!":"No host found...");
                         if (f) {
                             event.emit("state.change",R.drawable.ok2,R.string.found);
-                            event.emit("search.done",f);
-                            final Integer cState=rh.curState;
-                            if (rh.curState.compareTo(cState)<=0) {
+                            event.emit("search.done", true);
+                            final Integer cState= RemoteHelperView.curState;
+                            if (RemoteHelperView.curState.compareTo(cState)<=0) {
                                 try {
                                     Thread.sleep(2000);
                                 } catch (InterruptedException e) {
                                     Tools.log("Can't delay");
                                 }
 
-                                Tools.log("C:"+rh.curState.compareTo(cState)+":"+rh.curState);
+                                Tools.log("C:"+ RemoteHelperView.curState.compareTo(cState)+":"+ RemoteHelperView.curState);
                                 event.emit("state.change",R.drawable.ic_remote,isQS?R.string.remote_online:R.string.about);
                                 if (!isQS) {
-                                    if (rh.curState.compareTo(cState)<=1) {
+                                    if (RemoteHelperView.curState.compareTo(cState)<=1) {
                                         try {
                                             Thread.sleep(2000);
                                         } catch (InterruptedException e) {
                                             Tools.log("Can't delay");
                                         }
-                                        Tools.log("C:"+rh.curState.compareTo(cState)+":"+rh.curState);
+                                        Tools.log("C:"+ RemoteHelperView.curState.compareTo(cState)+":"+ RemoteHelperView.curState);
                                         event.emit("state.change",R.drawable.ic_remote,R.string.empty);
                                     }
                                 }
@@ -108,7 +107,7 @@ public class RemoteHelper {
                             //no tv found=offline
                             rh.setOffline(true);
                             event.emit("state.change",isQS?R.drawable.ic_remote:R.drawable.error,isQS?R.string.not_found_short:R.string.not_found_title);
-                            event.emit("search.done",f);
+                            event.emit("search.done", false);
                             event.emit("search.dialog");
                         }
                         isSearch=false;

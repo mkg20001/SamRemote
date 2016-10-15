@@ -14,14 +14,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class Tools {
-    public static String base64(String s) {
+    static String base64(String s) {
         if (s==null) s=""; //eq to null
         return Base64.encodeToString(s.getBytes(), Base64.DEFAULT);
     }
-    public static int base64len(String s) {
+    static int base64len(String s) {
         return base64(s).length();
     }
-    public static String chr(int c) {
+    static String chr(int c) {
         return Character.toString((char)c);
     }
     public static String getDeviceName() {
@@ -59,9 +59,9 @@ public class Tools {
     }
 
     private static final int NB_THREADS = 25;
-    public static Array ips=new Array();
+    private static final Array ips=new Array();
 
-    public static String[] doScan(String subnet) {
+    static String[] doScan(String subnet) {
         ips.clear();
         Tools.log("Start scanning on subnet "+subnet);
 

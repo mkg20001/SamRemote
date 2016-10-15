@@ -9,18 +9,18 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 class RCKey {
-    String k;
-    public RCKey(String key) throws InvalidKey {
+    private String k;
+    RCKey(String key) throws InvalidKey {
         if (!VerifyKey.verify(key)) throw new InvalidKey(key);
         this.k=key;
     }
-    public String getFormatted() {
+    String getFormatted() {
         return "KEY_"+k.toUpperCase();
     }
 }
 
 class VerifyKey {
-    static String allkeys[]={
+    private static final String[] allkeys={
             "down","up","left","right", //direction
             "play","pause","ff","rewind","ff_","rewind_", //media
             "enter","exit","return", //controls
@@ -28,7 +28,7 @@ class VerifyKey {
             "volup","voldown","chup","chdown", //vol/ch
             "poweroff","poweron" //main keys
     };
-    public static boolean verify(String k) {
+    static boolean verify(String k) {
         boolean found=false;
         for (int i = 0; i < VerifyKey.allkeys.length; i++) {
             if (VerifyKey.allkeys[i].equalsIgnoreCase(k)) found=true;
@@ -38,9 +38,9 @@ class VerifyKey {
 }
 
 class InvalidKey extends Exception {
-    public String key;
-    public String code;
-    public InvalidKey(String s) {
+    private final String key;
+    private final String code;
+    InvalidKey(String s) {
         super("Invalid RC Key: "+s);
         this.key=s;
         this.code="EINVALIDKEY";
@@ -49,17 +49,17 @@ class InvalidKey extends Exception {
 
 public class RC {
     //Connect & Control the TV
-    public boolean connected=false;
-    EventEmitter event;
-    String ip;
-    String mac;
-    String name;
-    String target;
-    int port=55000;
-    int timeout=5000;
-    String appString="iphone..iapp.samsung";
-    String tvAppString="iphone.UN60D6000.iapp.samsung";
-    public boolean connect(String ip) {
+    private boolean connected=false;
+    private final EventEmitter event;
+    private final String ip;
+    private final String mac;
+    private final String name;
+    private String target;
+    private final int port=55000;
+    private final int timeout=5000;
+    private final String appString="iphone..iapp.samsung";
+    private final String tvAppString="iphone.UN60D6000.iapp.samsung";
+    boolean connect(String ip) {
         Socket client;
 
         try{
@@ -121,12 +121,11 @@ public class RC {
                 Tools.chr(0x00) +
                 message;
     }
-    public boolean send(RCKey k) {
+    private void send(RCKey k) {
         final String key=k.getFormatted();
         if (!connected) {
             Tools.log("Cannot send "+key+" because: Offline!");
             event.emit("search");
-            return connected;
         }
         Tools.log("Sending "+key+"...");
         new Thread(new Runnable() {
@@ -134,9 +133,8 @@ public class RC {
                 conn(key,target);
             }
         }).start();
-        return true;
     }
-    private Socket conn(String command,String ip) {
+    private void conn(String command, String ip) {
         Socket client;
 
         try{
@@ -154,7 +152,6 @@ public class RC {
             Tools.log("No I/O - Offline?");
             onDisconnect(e);
         }
-        return null;
     }
 
     private void onDisconnect(Exception e) {

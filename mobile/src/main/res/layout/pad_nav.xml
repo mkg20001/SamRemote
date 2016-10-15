@@ -12,8 +12,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="0dp"
-        tools:context="mkg20001.net.samremote.Remote"
-        android:id="@+id/main">
+        tools:context="mkg20001.net.samremote.Remote">
 
         <ImageView
             app:srcCompat="@drawable/main_bg"

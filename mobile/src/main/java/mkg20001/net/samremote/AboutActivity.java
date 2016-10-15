@@ -5,12 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class AboutActivity extends AppCompatActivity {
-    Integer target= Build.VERSION.SDK_INT;
-    boolean mplus=target>=23;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +25,8 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        Drawable draw=getResources().getDrawable(R.drawable.close);
-        if (mplus) {
+        Drawable draw= ContextCompat.getDrawable(AboutActivity.this,R.drawable.close);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             fab.setForeground(draw);
         } else {
             fab.setImageDrawable(draw);
