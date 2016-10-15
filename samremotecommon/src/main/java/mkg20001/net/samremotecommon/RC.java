@@ -148,9 +148,8 @@ public class RC {
             client.setSoTimeout(timeout);
             client.close();
         } catch(UnknownHostException e) {
-            Tools.log("UnknownHostException");
+            Tools.log("Disconnected: Unkown Host");
             onDisconnect(e);
-            Tools.log("Disconnected: Host has moved away");
         } catch(IOException e) {
             Tools.log("No I/O - Offline?");
             onDisconnect(e);
