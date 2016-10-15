@@ -9,6 +9,9 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.text.format.Formatter;
@@ -163,7 +166,7 @@ public class QuickSettings extends TileService implements RemoteHelperView {
         if (isClick) return;
         isClick=true;
         log("Click Event");
-        EventListener e=new EventListener() {
+        final EventListener e=new EventListener() {
             @Override
             public void onEvent(Object... objects) {
                 QSDialog.Builder dialogBuilder = new QSDialog.Builder(getApplicationContext());
@@ -197,6 +200,14 @@ public class QuickSettings extends TileService implements RemoteHelperView {
                 QuickSettings.this.showDialog(dialog.onCreateDialog(args));
             }
         };
+        final Handler handle=new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message message) {
+                // This is where you do your work in the UI thread.
+                // Your worker tells you in the message what to do.
+                e.onEvent();
+            }
+        };
 
         if (isOn&&isOffline) {
             log("Offline - Turn Off");
@@ -215,6 +226,8 @@ public class QuickSettings extends TileService implements RemoteHelperView {
                     public void onEvent(Object... objects) {
                         if ((Boolean) objects[0]) {
                             log("Online!");
+                            log("Show Dialog");
+                            handle.obtainMessage().sendToTarget();
                             isOn=true;
                         } else {
                             log("Still Offline!");
