@@ -12,7 +12,7 @@
     <string name="more">More</string>
     <string name="empty" translatable="false"></string>
     <string name="action_settings">Settings</string>
-    <string name="remote_online">Remote Online</string>
+    <string name="remote_online">Remote Connected</string>
     <string name="offline">Offline</string>
     <string name="searching_">Searching…</string>
     <string name="not_found_short">Not found!</string>
