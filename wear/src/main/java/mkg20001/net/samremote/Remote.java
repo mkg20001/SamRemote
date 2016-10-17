@@ -226,8 +226,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                     private final FloatingActionButton icon=stateIcon;
                     @Override
                     public void run() {
-                        //icon.setForeground(getResources().getDrawable((int) objects[0])); min:23
-                        Drawable draw= ContextCompat.getDrawable(Remote.this,(int) objects[0]);
+                        Drawable draw = ContextCompat.getDrawable(Remote.this,(int) objects[0]);
                         draw.setColorFilter(whiteFilter);
                         icon.setForeground(draw);
                         Tools.log("Image set to "+objects[0]);

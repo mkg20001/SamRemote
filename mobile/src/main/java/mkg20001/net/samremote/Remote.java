@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
@@ -109,7 +108,6 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                 return true;
             }
         });
-        stateIcon.setColorFilter(Color.parseColor("#FFFFFF"));
         event.on("startup", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
@@ -196,14 +194,13 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                     private final FloatingActionButton icon=stateIcon;
                     @Override
                     public void run() {
-                        Drawable draw= ContextCompat.getDrawable(Remote.this,(int) objects[0]);
+                        Drawable draw = ContextCompat.getDrawable(Remote.this,(int) objects[0]);
                         draw.setColorFilter(whiteFilter);
                         if (mplus) {
                             setIcon(icon,draw);
                         } else {
                             icon.setImageDrawable(draw);
                         }
-                        //draw.setColorFilter(Color.parseColor("#FFFFFF"));
                         Tools.log("Image set to "+objects[0]);
                         int id=(int) objects[1];
                         stat.setText(id);

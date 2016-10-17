@@ -119,8 +119,6 @@ public class QuickSettings extends TileService implements RemoteHelperView {
             public void onEvent(final java.lang.Object... objects) {
                 log("Change stat");
                 Tile tile=getQsTile();
-                if (objects[0].toString().equalsIgnoreCase(((Integer) R.drawable.ic_remote).toString()))
-                    objects[0] = R.drawable.ic_remote_svg; //fix ugly icon
                 tile.setIcon(Icon.createWithResource(getApplicationContext(),(int) objects[0]));
                 Tools.log("Icon set to "+objects[0]);
                 int id=(int) objects[1];
