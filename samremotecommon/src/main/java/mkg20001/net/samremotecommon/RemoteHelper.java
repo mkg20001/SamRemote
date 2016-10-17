@@ -90,7 +90,7 @@ public class RemoteHelper {
                                 }
 
                                 Tools.log("C:"+ RemoteHelperView.curState.compareTo(cState)+":"+ RemoteHelperView.curState);
-                                event.emit("state.change",R.drawable.ic_remote,isQS?R.string.remote_online:R.string.about);
+                                event.emit("state.change",R.drawable.ic_remote_svg,isQS?R.string.remote_online:R.string.about);
                                 if (!isQS) {
                                     if (RemoteHelperView.curState.compareTo(cState)<=1) {
                                         try {
@@ -99,14 +99,14 @@ public class RemoteHelper {
                                             Tools.log("Can't delay");
                                         }
                                         Tools.log("C:"+ RemoteHelperView.curState.compareTo(cState)+":"+ RemoteHelperView.curState);
-                                        event.emit("state.change",R.drawable.ic_remote,R.string.empty);
+                                        event.emit("state.change",R.drawable.ic_remote_svg,R.string.empty);
                                     }
                                 }
                             }
                         } else {
                             //no tv found=offline
                             rh.setOffline(true);
-                            event.emit("state.change",isQS?R.drawable.ic_remote:R.drawable.error,isQS?R.string.not_found_short:R.string.not_found_title);
+                            event.emit("state.change",isQS?R.drawable.ic_remote_svg:R.drawable.error,isQS?R.string.not_found_short:R.string.not_found_title);
                             event.emit("search.done", false);
                             event.emit("search.dialog");
                         }

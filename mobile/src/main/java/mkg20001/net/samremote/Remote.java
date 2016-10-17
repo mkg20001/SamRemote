@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -39,6 +41,7 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
     }
     private Integer curState=0;
     private boolean isOffline=true;
+    private static ColorFilter whiteFilter=Tools.filter();
     @Override
     public void setOffline(boolean s) {
         isOffline=s;
@@ -106,6 +109,7 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                 return true;
             }
         });
+        stateIcon.setColorFilter(Color.parseColor("#FFFFFF"));
         event.on("startup", new EventListener() {
             @Override
             public void onEvent(java.lang.Object... objects) {
@@ -192,20 +196,17 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                     private final FloatingActionButton icon=stateIcon;
                     @Override
                     public void run() {
-                        if (!mplus) {
-                            if (objects[0].toString().equalsIgnoreCase(((Integer) R.drawable.ic_remote).toString()))
-                                objects[0] = R.drawable.ic_remote_svg; //fix ugly icon
-                        }
                         Drawable draw= ContextCompat.getDrawable(Remote.this,(int) objects[0]);
+                        draw.setColorFilter(whiteFilter);
                         if (mplus) {
                             setIcon(icon,draw);
                         } else {
                             icon.setImageDrawable(draw);
                         }
+                        //draw.setColorFilter(Color.parseColor("#FFFFFF"));
                         Tools.log("Image set to "+objects[0]);
                         int id=(int) objects[1];
                         stat.setText(id);
-                        icon.setColorFilter(R.color.light);
                         curState++;
                     }
                 }));

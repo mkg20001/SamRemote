@@ -3,6 +3,8 @@ package mkg20001.net.samremote;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.drawable.Drawable;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -38,6 +40,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
     private BoxInsetLayout mContainerView;
     private TextView mTextView;
     private TextView mClockView;
+    private static ColorFilter whiteFilter=Tools.filter();
 
     /* implements */
     private RC remote=null;
@@ -103,6 +106,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
 
         state=(TextView) findViewById(R.id.state);
         stateIcon=(FloatingActionButton) findViewById(R.id.stateFAB);
+        stateIcon.setColorFilter(Color.parseColor("#FFFFFF"));
         stateIcon.setOnClickListener(stateClick);
         stateIcon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -224,6 +228,7 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                     public void run() {
                         //icon.setForeground(getResources().getDrawable((int) objects[0])); min:23
                         Drawable draw= ContextCompat.getDrawable(Remote.this,(int) objects[0]);
+                        draw.setColorFilter(whiteFilter);
                         icon.setForeground(draw);
                         Tools.log("Image set to "+objects[0]);
                         stat.setText((int) objects[1]);

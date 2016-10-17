@@ -1,5 +1,8 @@
 package mkg20001.net.samremotecommon;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -14,6 +17,20 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class Tools {
+    public static ColorFilter filter() {
+        int iColor = Color.parseColor("#FFFFFF");
+
+        int red   = (iColor & 0xFF0000) / 0xFFFF;
+        int green = (iColor & 0xFF00) / 0xFF;
+        int blue  = iColor & 0xFF;
+
+        float[] matrix = { 0, 0, 0, 0, red,
+                0, 0, 0, 0, green,
+                0, 0, 0, 0, blue,
+                0, 0, 0, 1, 0 };
+
+        return new ColorMatrixColorFilter(matrix);
+    }
     static String base64(String s) {
         if (s==null) s=""; //eq to null
         return Base64.encodeToString(s.getBytes(), Base64.DEFAULT);
