@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/mobile" />
+            <option value="$PROJECT_DIR$/nodestyle" />
             <option value="$PROJECT_DIR$/samremotecommon" />
             <option value="$PROJECT_DIR$/wear" />
           </set>

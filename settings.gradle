@@ -1,1 +1,1 @@
-include ':mobile', ':wear', ':samremotecommon'
+include ':mobile', ':wear', ':samremotecommon', ':nodestyle'

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SamRemote.iml" filepath="$PROJECT_DIR$/SamRemote.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nodestyle/nodestyle.iml" filepath="$PROJECT_DIR$/nodestyle/nodestyle.iml" />
       <module fileurl="file://$PROJECT_DIR$/samremotecommon/samremotecommon.iml" filepath="$PROJECT_DIR$/samremotecommon/samremotecommon.iml" />
       <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
     </modules>
