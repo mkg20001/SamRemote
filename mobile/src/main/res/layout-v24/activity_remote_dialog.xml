@@ -1,28 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    app:theme="@style/AppTheme"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
-    <TextView
-        style="@style/HeadingFont"
-        android:text="@string/app_name"
-        android:background="@color/topBarColor"
-        android:layout_marginTop="0sp"
-        android:padding="16sp"/>
-
-    <TextView
-        style="@style/BodyFont"
-        android:text="@string/about"
-        android:textColor="@color/colorPrimaryDark"/>
-
-    <ImageButton
+    <!--<ImageButton
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:src="@drawable/ok2"
-        android:id="@+id/key2_enter"
+        android:id="@+id/dialog_enter2"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:tint="@android:color/background_dark"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter" />!-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingTop="0dp">
+
+        <TextView
+            style="@style/HeadingFont"
+            android:text="@string/app_name"
+            android:background="@color/topBarColor"
+            android:layout_marginTop="0sp"
+            android:padding="16sp"/>
+
+        <TextView
+            style="@style/BodyFont"
+            android:text="@string/about"
+            android:layout_marginTop="64sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/textView2" />
+
+        <include layout="@layout/pad_nav_dialog" />
+
+        <!--android:foreground="@drawable/ic_remote"!-->
+
+        <TextView
+            style="@style/HeadingFont"
+            android:layout_marginTop="0sp"
+            android:padding="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
+            android:id="@+id/toolbar3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"  />
+
+        <!--<android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/powerBt"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/toolbar3"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />-->
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ok2"
+            android:id="@+id/dialog_enter"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:tint="@android:color/background_dark"
+            android:scaleType="fitCenter"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/dialog_back"
+            android:layout_alignEnd="@+id/dialog_exit"
+            android:layout_alignTop="@+id/toolbar3" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/key_exit"
+            android:layout_alignTop="@+id/toolbar3"
+            android:id="@+id/dialog_exit"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:tint="@android:color/background_dark"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:scaleType="fitCenter"
+            android:contentDescription="Exit" />
+
+        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/key_source"
+            android:id="@+id/dialog_hdmi"
+            android:tint="@android:color/background_dark"
+            android:layout_above="@+id/dialog_menu"
+            android:layout_alignStart="@+id/dialog_source"
+            android:layout_marginBottom="11dp" />
+
+
+        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/key_source"
+            android:id="@+id/dialog_source"
+            android:tint="@android:color/background_dark"
+            android:layout_below="@+id/dialog_hdmi"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/key_chlist"
+            android:tint="@android:color/background_dark"
+            android:layout_alignTop="@+id/dialog_menu"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageButton3" />
+
+        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/menu"
+            android:id="@+id/dialog_menu"
+            android:tint="@android:color/background_dark"
+            android:layout_marginBottom="41dp"
+            android:layout_above="@+id/toolbar3" />
+
+        <!--             android:src="@android:drawable/ic_lock_power_off" !-->
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            android:id="@+id/dialog_back"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:tint="@android:color/background_dark"
+            android:scaleType="fitCenter"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/dialog_menu"
+            android:contentDescription="Return" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:id="@+id/dialog_poweroff"
+            android:tint="@color/powerBt"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:src="@android:drawable/ic_lock_power_off"
+            android:layout_alignTop="@+id/textView2"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/arrow_down"
+            android:id="@+id/dialog_chdown"
+            android:tint="@android:color/background_dark"
+            android:layout_alignTop="@+id/dialog_voldown"
+            android:layout_alignStart="@+id/dialog_poweroff" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/key_down"
+            android:layout_marginTop="27dp"
+            android:id="@+id/dialog_voldown"
+            android:tint="@android:color/background_dark"
+            android:layout_below="@+id/dialog_volup"
+            android:layout_alignStart="@+id/dialog_volup" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/arrow_up"
+            android:id="@+id/dialog_chup"
+            android:tint="@android:color/background_dark"
+            android:layout_above="@+id/dialog_voldown"
+            android:layout_alignStart="@+id/dialog_chdown" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/key_volup"
+            android:id="@+id/dialog_volup"
+            android:tint="@android:color/background_dark"
+            android:layout_marginTop="118dp"
+            android:layout_below="@+id/dialog_poweroff"
+            android:layout_alignEnd="@+id/dialog_menu" />
+
+    </RelativeLayout>
 
 </LinearLayout>

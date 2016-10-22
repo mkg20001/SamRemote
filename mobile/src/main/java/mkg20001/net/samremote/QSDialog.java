@@ -6,13 +6,14 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import net.nodestyle.events.EventEmitter;
 
 import mkg20001.net.samremotecommon.PushButton;
-import mkg20001.net.samremotecommon.Tools;
+
+import static mkg20001.net.samremotecommon.Tools.log;
 
 public class QSDialog
         extends DialogFragment {
@@ -79,22 +80,22 @@ public class QSDialog
                 new AlertDialog.Builder(this._context);
 
         alertBuilder
-                .setView(R.layout.activity_remote_dialog)
+                .setView(createLayout(R.layout.activity_remote_dialog,this._context))
 
                 // OnAttach doesn't get called on the dialog;
                 // we have to apply our click event handlers here.
-                /*.setNegativeButton(R.string.cancel,
+                .setNegativeButton(R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Log.d("QS", "Dialog cancel");
+                                log("Open in App");
                                 _listener.onDialogNegativeClick(QSDialog.this);
                             }
-                        })*/
+                        })
                 .setPositiveButton(actionButtonText,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                Log.d("QS", "Dialog action taken");
+                                log("Close QS");
                                 dialog.dismiss();
 
                                 _listener.onDialogPositiveClick(QSDialog.this);
@@ -102,6 +103,51 @@ public class QSDialog
                         });
 
         return initAll(alertBuilder.create());
+    }
+
+    private View createLayout(int layoutid,Context context) {
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService
+                (Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(layoutid, null);
+
+        for (Integer i:new Integer[]{
+                R.id.dialog_poweroff,
+                R.id.dialog_left,R.id.dialog_right,R.id.dialog_down,R.id.dialog_up,R.id.dialog_ok,
+                R.id.dialog_volup,R.id.dialog_voldown,R.id.dialog_chup,R.id.dialog_chdown,
+                R.id.dialog_enter,R.id.dialog_back,R.id.dialog_exit,
+                R.id.dialog_menu,R.id.dialog_hdmi,R.id.dialog_source
+        }) {
+            View b=layout.findViewById(i);
+            if (b==null) {
+                log("KEY ERROR - IS ZERO: "+i);
+            } else {
+                b.setOnClickListener(keyClick);
+            }
+        }
+
+        //Power
+        new PushButton(R.id.dialog_poweroff,"poweroff",event);
+        //Dir
+        new PushButton(R.id.dialog_left,"left",event);
+        new PushButton(R.id.dialog_right,"right",event);
+        new PushButton(R.id.dialog_down,"down",event);
+        new PushButton(R.id.dialog_up,"up",event);
+        new PushButton(R.id.dialog_ok,"enter",event);
+        //Vol/CH
+        new PushButton(R.id.dialog_volup,"volup",event);
+        new PushButton(R.id.dialog_voldown,"voldown",event);
+        new PushButton(R.id.dialog_chup,"chup",event);
+        new PushButton(R.id.dialog_chdown,"chdown",event);
+        //Main
+        new PushButton(R.id.dialog_enter,"enter",event);
+        new PushButton(R.id.dialog_back,"return",event);
+        new PushButton(R.id.dialog_exit,"exit",event);
+        //Special
+        new PushButton(R.id.dialog_menu,"menu",event);
+        new PushButton(R.id.dialog_hdmi,"hdmi",event);
+        new PushButton(R.id.dialog_source,"source",event);
+
+        return layout;
     }
 
     private QSDialog setClickListener(QSDialogListener listener) {
@@ -127,44 +173,6 @@ public class QSDialog
     };
 
     private Dialog initAll(Dialog d) {
-        // TODO: 09.10.16 init buttons
-        for (Integer i:new Integer[]{
-                /*R.id.key_poweroff,
-                R.id.key_left,R.id.key_right,R.id.key_down,R.id.key_up,R.id.key_ok,
-                R.id.key_volup,R.id.key_voldown,R.id.key_chup,R.id.key_chdown,
-                R.id.key_enter,R.id.key_back,R.id.key_exit,
-                R.id.key_menu,R.id.key_hdmi,R.id.key_source*/
-                R.id.key2_enter
-        }) {
-            View b=d.findViewById(i);
-            if (b==null) {
-                Tools.log("KEY ERROR - IS ZERO: "+i);
-            } else {
-                b.setOnClickListener(keyClick);
-            }
-        }
-
-        /*//Power
-        new PushButton(R.id.key_poweroff,"poweroff",event);
-        //Dir
-        new PushButton(R.id.key_left,"left",event);
-        new PushButton(R.id.key_right,"right",event);
-        new PushButton(R.id.key_down,"down",event);
-        new PushButton(R.id.key_up,"up",event);
-        new PushButton(R.id.key_ok,"enter",event);
-        //Vol/CH
-        new PushButton(R.id.key_volup,"volup",event);
-        new PushButton(R.id.key_voldown,"voldown",event);
-        new PushButton(R.id.key_chup,"chup",event);
-        new PushButton(R.id.key_chdown,"chdown",event);*/
-        //Main
-        new PushButton(R.id.key2_enter,"enter",event);
-        /*new PushButton(R.id.key_back,"return",event);
-        new PushButton(R.id.key_exit,"exit",event);
-        //Special
-        new PushButton(R.id.key_menu,"menu",event);
-        new PushButton(R.id.key_hdmi,"hdmi",event);
-        new PushButton(R.id.key_source,"source",event);*/
         return d;
     }
 }
