@@ -1,5 +1,6 @@
 # SamRemote
 [![Build Status](https://travis-ci.org/mkg20001/SamRemote.svg?branch=master)](https://travis-ci.org/mkg20001/SamRemote)
+
 Control your Samsung TV with SamRemote
 
 Note: This App uses WiFI **NOT IR**
