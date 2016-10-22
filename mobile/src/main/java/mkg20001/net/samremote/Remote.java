@@ -17,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import net.nodestyle.events.EventEmitter;
@@ -90,6 +91,11 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD|
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_remote);
