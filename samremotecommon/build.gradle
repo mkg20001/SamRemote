@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+    compile fileTree(include: ['*.jar'], dir: new File(rootProject.rootDir,"nodestyle/build/libs"))
     compile project(":nodestyle")
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
