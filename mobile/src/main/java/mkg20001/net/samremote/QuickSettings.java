@@ -3,6 +3,7 @@ package mkg20001.net.samremote;
 import android.annotation.TargetApi;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Icon;
 import android.net.wifi.WifiInfo;
@@ -157,9 +158,6 @@ public class QuickSettings extends TileService implements RemoteHelperView {
     @Override
     public void onClick(){
 
-        // Get the tile's current state.
-        //Tile tile = getQsTile();
-        //isTileActive = (tile.getState() == Tile.STATE_ACTIVE);
         if (isClick) log("Ignore onClick - Already running");
         if (isClick) return;
         isClick=true;
@@ -174,35 +172,23 @@ public class QuickSettings extends TileService implements RemoteHelperView {
                         .setClickListener(new QSDialog.QSDialogListener() {
                             @Override
                             public void onDialogPositiveClick(DialogFragment dialog) {
-                                log("Positive");
-
-                                // The user wants to change the tile state.
-                                //isTileActive = !isTileActive;
+                                //do nothing
                             }
 
                             @Override
                             public void onDialogNegativeClick(DialogFragment dialog) {
-                                log("Negative");
-
-                                // The user is cancelled the dialog box.
-                                // We can't do anything to the dialog box here,
-                                // but we can do any cleanup work.
+                                Intent intent = new Intent(QuickSettings.this, Remote.class);
+                                startActivity(intent);
                             }
                         })
                         .create();
-
-                // Pass the tile's current state to the dialog.
-                Bundle args = new Bundle();
-                //args.putBoolean(QSDialog.TILE_STATE_KEY, isTileActive);
-
-                QuickSettings.this.showDialog(dialog.onCreateDialog(args));
+                QuickSettings.this.showDialog(dialog.onCreateDialog(new Bundle()));
             }
         };
         final Handler handle=new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message message) {
-                // This is where you do your work in the UI thread.
-                // Your worker tells you in the message what to do.
+                //open dialog
                 e.onEvent();
             }
         };

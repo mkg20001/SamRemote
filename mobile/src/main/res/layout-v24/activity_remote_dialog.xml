@@ -12,7 +12,7 @@
         android:src="@drawable/ok2"
         android:id="@+id/dialog_enter2"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:tint="@android:color/background_dark"
+        android:tint="@color/lightBt"
         android:scaleType="fitCenter" />!-->
 
     <RelativeLayout
@@ -21,7 +21,8 @@
         android:paddingBottom="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:paddingTop="0dp">
+        android:paddingTop="0dp"
+        android:background="@color/colorPrimary">
 
         <TextView
             style="@style/HeadingFont"
@@ -34,7 +35,7 @@
             style="@style/BodyFont"
             android:text="@string/about"
             android:layout_marginTop="64sp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/lightBt"
             android:id="@+id/textView2" />
 
         <include layout="@layout/pad_nav_dialog" />
@@ -47,20 +48,10 @@
             android:padding="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/background_light"
+            android:background="@android:color/background_dark"
             android:id="@+id/toolbar3"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"  />
-
-        <!--<android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/powerBt"
-            android:theme="?attr/actionBarTheme"
-            android:minHeight="?attr/actionBarSize"
-            android:id="@+id/toolbar3"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />-->
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -68,7 +59,7 @@
             android:src="@drawable/ok2"
             android:id="@+id/dialog_enter"
             style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:tint="@android:color/background_dark"
+            android:tint="@android:color/background_light"
             android:scaleType="fitCenter"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/dialog_back"
@@ -83,7 +74,7 @@
             android:id="@+id/dialog_exit"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:tint="@android:color/background_dark"
+            android:tint="@android:color/background_light"
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:scaleType="fitCenter"
             android:contentDescription="Exit" />
@@ -95,7 +86,7 @@
             android:clickable="true"
             android:src="@drawable/key_source"
             android:id="@+id/dialog_hdmi"
-            android:tint="@android:color/background_dark"
+            android:tint="@color/lightBt"
             android:layout_above="@+id/dialog_menu"
             android:layout_alignStart="@+id/dialog_source"
             android:layout_marginBottom="11dp" />
@@ -108,7 +99,7 @@
             android:clickable="true"
             android:src="@drawable/key_source"
             android:id="@+id/dialog_source"
-            android:tint="@android:color/background_dark"
+            android:tint="@color/lightBt"
             android:layout_below="@+id/dialog_hdmi"
             android:layout_alignParentEnd="true" />
 
@@ -118,7 +109,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/key_chlist"
-            android:tint="@android:color/background_dark"
+            android:tint="@color/lightBt"
             android:layout_alignTop="@+id/dialog_menu"
             android:layout_centerHorizontal="true"
             android:id="@+id/imageButton3" />
@@ -130,7 +121,7 @@
             android:clickable="true"
             android:src="@drawable/menu"
             android:id="@+id/dialog_menu"
-            android:tint="@android:color/background_dark"
+            android:tint="@color/lightBt"
             android:layout_marginBottom="41dp"
             android:layout_above="@+id/toolbar3" />
 
@@ -141,7 +132,7 @@
             android:src="@drawable/back"
             android:id="@+id/dialog_back"
             style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:tint="@android:color/background_dark"
+            android:tint="@android:color/background_light"
             android:scaleType="fitCenter"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
@@ -160,46 +151,64 @@
             android:layout_alignParentEnd="true" />
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/arrow_down"
-            android:id="@+id/dialog_chdown"
-            android:tint="@android:color/background_dark"
-            android:layout_alignTop="@+id/dialog_voldown"
-            android:layout_alignStart="@+id/dialog_poweroff" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:src="@drawable/key_down"
-            android:layout_marginTop="27dp"
-            android:id="@+id/dialog_voldown"
-            android:tint="@android:color/background_dark"
-            android:layout_below="@+id/dialog_volup"
-            android:layout_alignStart="@+id/dialog_volup" />
-
-        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/arrow_up"
             android:id="@+id/dialog_chup"
-            android:tint="@android:color/background_dark"
-            android:layout_above="@+id/dialog_voldown"
-            android:layout_alignStart="@+id/dialog_chdown" />
+            android:tint="@color/lightBt"
+            android:layout_alignTop="@+id/dialog_volup"
+            android:layout_alignParentEnd="true" />
 
         <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/arrow_down"
+            android:id="@+id/dialog_chdown"
+            android:tint="@color/lightBt"
+            android:layout_alignTop="@+id/dialog_voldown"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/key_down"
+            android:id="@+id/dialog_voldown"
+            android:tint="@color/lightBt"
+            android:layout_below="@+id/dialog_volup"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="14dp" />
+
+        <ImageButton
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/key_volup"
             android:id="@+id/dialog_volup"
-            android:tint="@android:color/background_dark"
-            android:layout_marginTop="118dp"
+            android:tint="@color/lightBt"
+            android:layout_marginTop="19dp"
             android:layout_below="@+id/dialog_poweroff"
-            android:layout_alignEnd="@+id/dialog_menu" />
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/ic_remote_svg"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:tint="@android:color/background_light"
+            android:scaleType="fitCenter"
+            android:id="@+id/dialog_close"
+            android:saveEnabled="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/dialog_poweroff"
+            android:layout_marginStart="12dp" />
 
     </RelativeLayout>
 

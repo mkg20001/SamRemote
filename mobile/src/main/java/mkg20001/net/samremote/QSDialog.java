@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,27 +67,23 @@ public class QSDialog
     @Override
     public Dialog onCreateDialog(Bundle savedState){
 
-        // Read the saved state data passed in.
-        /*boolean isTileActive = false;
-        if (savedState.containsKey(TILE_STATE_KEY)) {
-            isTileActive = savedState.getBoolean(TILE_STATE_KEY);
-        }*/
-
         int actionButtonText = R.string.ok;
 
         AlertDialog.Builder alertBuilder =
                 new AlertDialog.Builder(this._context);
 
         alertBuilder
-                .setView(createLayout(R.layout.activity_remote_dialog,this._context))
+                .setView(createLayout(R.layout.activity_remote_dialog,this._context));
 
                 // OnAttach doesn't get called on the dialog;
                 // we have to apply our click event handlers here.
-                .setNegativeButton(R.string.cancel,
+                /*.setNegativeButton(R.string.app_name,
                         new DialogInterface.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+                            public void onClick(DialogInterface dialog, int i) {
                                 log("Open in App");
+                                dialog.dismiss();
+
                                 _listener.onDialogNegativeClick(QSDialog.this);
                             }
                         })
@@ -96,14 +91,15 @@ public class QSDialog
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 log("Close QS");
-                                dialog.dismiss();
 
                                 _listener.onDialogPositiveClick(QSDialog.this);
                             }
-                        });
+                        });*/
 
         return initAll(alertBuilder.create());
     }
+
+    private View closeBT;
 
     private View createLayout(int layoutid,Context context) {
         LayoutInflater inflater = (LayoutInflater)context.getSystemService
@@ -124,6 +120,7 @@ public class QSDialog
                 b.setOnClickListener(keyClick);
             }
         }
+        closeBT=layout.findViewById(R.id.dialog_close);
 
         //Power
         new PushButton(R.id.dialog_poweroff,"poweroff",event);
@@ -172,7 +169,22 @@ public class QSDialog
         }
     };
 
-    private Dialog initAll(Dialog d) {
+    private Dialog initAll(final Dialog d) {
+        closeBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+                _listener.onDialogPositiveClick(QSDialog.this);
+            }
+        });
+        closeBT.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                d.dismiss();
+                _listener.onDialogNegativeClick(QSDialog.this);
+                return true;
+            }
+        });
         return d;
     }
 }
