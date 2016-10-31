@@ -5,6 +5,7 @@ android:
   - tools
   - extra-google-m2repository,extra-android-m2repository
   - build-tools-25.0.0
+  - build-tools-24.0.2
   - platform-tools,tools,android-21,android-22,android-23,android-24,android-25,extra-google-google_play_services,addon-google_apis-google-24
   licenses:
   - 'android-sdk-preview-license-*'
