@@ -1,18 +1,7 @@
 language: android
 android:
   components:
-  - platform-tools
-  - tools
-  - build-tools
-  - android-21
-  - android-22
-  - android-23
-  - android-24
-  - android-25
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google
+  - platform-tools,tools,build-tools,android-21,android-22,android-23,android-24,android-25,extra-google-google_play_services,extra-google-m2repository,extra-android-m2repository,addon-google_apis-google-24
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
