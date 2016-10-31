@@ -18,4 +18,9 @@
     <string name="not_found_short">Not found!</string>
 
     <string name="hello_world">Hello World!</string>
+    <string name="key_source">Change Source</string>
+    <string name="key_power">Turn Off</string>
+    <string name="key_chlist">Channel List</string>
+    <string name="shortcut_na">Shortcut not available</string>
+    <string name="key_menu">Open Menu</string>
 </resources>

@@ -102,6 +102,21 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
 
         checkForDebugMode();
 
+        String action=getIntent().getAction();
+        if (action.startsWith("samremote.")) {
+            final String key=action.replace("samremote.","");
+            Tools.log("Intent KEY: "+key);
+            event.once("search.done", new EventListener() {
+                @Override
+                public void onEvent(Object... objects) {
+                    Boolean ok=(Boolean) objects[0];
+                    if (ok) {
+                        event.emit("keysend",key);
+                    }
+                }
+            });
+        }
+
         state=(TextView) findViewById(R.id.state);
         stateIcon=(FloatingActionButton) findViewById(R.id.stateFAB);
         stateIcon.setOnClickListener(stateClick);

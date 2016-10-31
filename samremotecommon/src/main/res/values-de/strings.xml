@@ -16,4 +16,9 @@
     <string name="offline">Offline</string>
     <string name="searching_">Suchen…</string>
     <string name="not_found_short">Nicht Gefunden!</string>
+    <string name="key_source">Quelle Ändern</string>
+    <string name="key_power">Ausschalten</string>
+    <string name="key_chlist">Kanal Liste</string>
+    <string name="shortcut_na">Abkürzung ist nicht verfügbar</string>
+    <string name="key_menu">Menü Öffnen</string>
 </resources>

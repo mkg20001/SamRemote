@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:targetApi="25">
+    <!-- shotcuts: chlist, source, power, (overlay?) app -->
+    <!-- list is in reverse order -->
+    <shortcut
+        android:shortcutId="power"
+        android:enabled="true"
+        android:icon="@drawable/short_poweroff"
+        android:shortcutShortLabel="@string/key_power"
+        android:shortcutLongLabel="@string/key_power"
+        android:shortcutDisabledMessage="@string/shortcut_na">
+        <intent
+            android:action="samremote.poweroff"
+            android:targetPackage="mkg20001.net.samremote"
+            android:targetClass="mkg20001.net.samremote.Remote" />
+        <categories android:name="android.shortcut.remote" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="menu"
+        android:enabled="true"
+        android:icon="@drawable/short_menu"
+        android:shortcutShortLabel="@string/key_menu"
+        android:shortcutLongLabel="@string/key_menu"
+        android:shortcutDisabledMessage="@string/shortcut_na">
+        <intent
+            android:action="samremote.menu"
+            android:targetPackage="mkg20001.net.samremote"
+            android:targetClass="mkg20001.net.samremote.Remote" />
+        <categories android:name="android.shortcut.remote" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="source"
+        android:enabled="true"
+        android:icon="@drawable/short_source"
+        android:shortcutShortLabel="@string/key_source"
+        android:shortcutLongLabel="@string/key_source"
+        android:shortcutDisabledMessage="@string/shortcut_na">
+        <intent
+            android:action="samremote.source"
+            android:targetPackage="mkg20001.net.samremote"
+            android:targetClass="mkg20001.net.samremote.Remote" />
+        <categories android:name="android.shortcut.remote" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="chlist"
+        android:enabled="true"
+        android:icon="@drawable/short_chlist"
+        android:shortcutShortLabel="@string/key_chlist"
+        android:shortcutLongLabel="@string/key_chlist"
+        android:shortcutDisabledMessage="@string/shortcut_na">
+        <intent
+            android:action="samremote.chlist"
+            android:targetPackage="mkg20001.net.samremote"
+            android:targetClass="mkg20001.net.samremote.Remote"/>
+        <categories android:name="android.shortcut.remote" />
+    </shortcut>
+</shortcuts>
+
