@@ -37,8 +37,6 @@
             android:layout_alignParentStart="true"
             android:layout_marginBottom="14dp" />
 
-        <!--android:foreground="@drawable/ic_remote"!-->
-
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,7 +154,6 @@
             android:layout_alignTop="@+id/state"
             android:layout_alignParentEnd="true"
             app:srcCompat="@android:drawable/ic_lock_power_off" />
-<!--             app:srcCompat="@android:drawable/ic_lock_power_off" !-->
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
