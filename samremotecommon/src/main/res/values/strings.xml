@@ -8,7 +8,7 @@
     <string name="search">Search Again</string>
     <string name="cancel">Cancel</string>
     <string name="found">Found TV!</string>
-    <string name="about_full">SamRemote is a Samsung Remote Control App for Samsung TVs\nDeveloped by Maciej Krüger\nUses the library NodeStyle\nSamsung is a registered Trademark of Samsung Inc.</string>
+    <string name="about_full">SamRemote is a Samsung Remote Control App for Samsung TVs\nDeveloped by Maciej Krüger\nUses the library NodeStyle\nSamsung is a registered Trademark of Samsung Electronics Co Ltd.</string>
     <string name="more">More</string>
     <string name="empty" translatable="false"></string>
     <string name="action_settings">Settings</string>
