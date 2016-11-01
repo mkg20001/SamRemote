@@ -102,7 +102,7 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
 
         checkForDebugMode();
 
-        String action=getIntent().getAction();
+        String action=getIntent().getAction()==null?"null":getIntent().getAction();
         if (action.startsWith("samremote.")) {
             final String key=action.replace("samremote.","");
             Tools.log("Intent KEY: "+key);
