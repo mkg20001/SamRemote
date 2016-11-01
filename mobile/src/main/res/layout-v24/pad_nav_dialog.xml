@@ -45,7 +45,7 @@
             android:tint="@android:color/background_light"
             android:layout_alignTop="@+id/dialog_left"
             android:layout_alignEnd="@+id/bg"
-            android:layout_marginStart="16dp" />
+            android:layout_marginEnd="16dp" />
 
         <ImageView
             android:layout_width="wrap_content"
