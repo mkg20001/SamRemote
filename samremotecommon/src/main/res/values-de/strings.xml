@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="searching">Suche nach einem Samsung Fernseher…</string>
-    <string name="not_found">Fernseher nicht gefunden!\nIst er eingeschaltet?</string>
+    <string name="not_found">Fernseher nicht gefunden!\nIst er eingeschaltet und mit dem WLAN verbunden?</string>
     <string name="about">Steuere deinen Samsung Fernseher</string>
     <string name="not_found_title">Fehler: Fernseher nicht gefunden!</string>
     <string name="ok">Ok</string>

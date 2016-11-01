@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Sam Remote</string>
     <string name="searching">Looking for a Samsung TV…</string>
-    <string name="not_found">TV not found!\nIs the TV powered on?</string>
+    <string name="not_found">TV not found!\nIs the TV powered on and connected to WiFi?</string>
     <string name="about">Control your Samsung TV</string>
     <string name="not_found_title">Error: TV not found!</string>
     <string name="ok">OK</string>
