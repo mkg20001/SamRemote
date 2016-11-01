@@ -129,7 +129,8 @@
             app:srcCompat="@drawable/key_chlist"
             android:tint="@android:color/background_light"
             android:layout_alignTop="@+id/key_menu"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:id="@+id/floatingActionButton2" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -171,45 +172,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/side_bg"
-            android:id="@+id/imageView2"
+            android:id="@+id/side_left"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/state"
-            android:layout_alignEnd="@+id/key_back"
-            android:padding="16dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/side_bg"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true"
-            android:layout_toStartOf="@+id/state"
-            android:layout_alignEnd="@+id/key_back"
-            android:padding="16dp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/side_bg"
-            android:padding="16dp"
-            android:layout_alignTop="@+id/imageView2"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/state"
-            android:layout_alignStart="@+id/key_exit" />
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="16dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             app:fabSize="mini"
-            app:srcCompat="@drawable/arrow_down"
-            android:id="@+id/key_chdown"
+            app:srcCompat="@drawable/key_volup"
+            android:id="@+id/key_volup"
             app:backgroundTint="@color/bgLight"
             android:tint="@android:color/background_light"
             app:elevation="0dp"
-            android:layout_alignTop="@+id/key_voldown"
-            android:layout_alignStart="@+id/key_poweroff" />
+            android:layout_alignTop="@+id/side_left"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="12dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -217,13 +197,22 @@
             android:clickable="true"
             app:fabSize="mini"
             app:srcCompat="@drawable/key_down"
-            android:layout_marginTop="27dp"
             android:id="@+id/key_voldown"
             app:backgroundTint="@color/bgLight"
             android:tint="@android:color/background_light"
             app:elevation="0dp"
-            android:layout_below="@+id/key_volup"
-            android:layout_alignStart="@+id/key_volup" />
+            android:layout_alignBottom="@+id/side_left"
+            android:layout_marginLeft="28dp"
+            android:layout_marginBottom="12dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/side_bg"
+            android:id="@+id/side_right"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="16dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -235,23 +224,25 @@
             app:backgroundTint="@color/bgLight"
             android:tint="@android:color/background_light"
             app:elevation="0dp"
-            android:layout_above="@+id/key_voldown"
-            android:layout_alignStart="@+id/key_chdown" />
+            android:layout_alignTop="@+id/side_right"
+            android:layout_marginRight="28dp"
+            android:layout_marginTop="12dp"
+            android:layout_alignParentRight="true" />
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
             app:fabSize="mini"
-            app:srcCompat="@drawable/key_volup"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="91dp"
-            android:id="@+id/key_volup"
+            app:srcCompat="@drawable/arrow_down"
+            android:id="@+id/key_chdown"
             app:backgroundTint="@color/bgLight"
             android:tint="@android:color/background_light"
             app:elevation="0dp"
-            android:layout_alignTop="@+id/imageView2"
-            android:layout_alignStart="@+id/textView" />
+            android:layout_alignBottom="@+id/side_right"
+            android:layout_marginRight="28dp"
+            android:layout_marginBottom="12dp"
+            android:layout_alignParentRight="true" />
 
     </RelativeLayout>
 
