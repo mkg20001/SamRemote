@@ -8,9 +8,9 @@ android:
   - build-tools-24.0.2
   - platform-tools,tools,android-21,android-22,android-23,android-24,android-25,extra-google-google_play_services,addon-google_apis-google-24
   licenses:
-  - 'android-sdk-preview-license-*'
-  - 'android-sdk-license-.+'
-  - 'google-gdk-license-.+'
+  - android-sdk-preview-license-*
+  - android-sdk-license-.+
+  - google-gdk-license-.+
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -f  $HOME/.gradle/caches/modules-3/modules-3.lock
@@ -23,15 +23,17 @@ cache:
   - "$HOME/.Android/"
 jdk: oraclejdk8
 deploy:
-- provider: script
-  script: bash .travis/upload.sh
+  provider: releases
+  file_glob: true
+  file:
+    - */build/outputs/apk/*
+    - */build/outputs/lint-results-*.*/*
   skip_cleanup: true
   on:
-    branch: master
+    tags: true
+  api_key:
+    secure: 0ikMeKE58gx95n0TIvlH8MvysTpxBDQjYYaEiX2WaFmwdlWdYJ8r6YqsEI2H3WNMHYuodK7MEFtVc1/KVXdUXFU2bIm3JoRSikmKB2mwDfIKAFIBj8NY6YhkZZQIIelCraOVuGr5h0jHNEMvF9QBrVnCGDDCFWxGDiVZ59HzV7QCqLwmmOMuCCLB/UgvKATkxPBbxPe0IQ+Dx0CVTIhm81lrgNkXOCMU2SwlS2gi9pfEE7jKBqWH9yiA7rTMakEO9tFq2qp2FMBCRQELbIEzhIfF5RlWItYSRPM9gA96Ox1guJOJIXoqH7nr3y5Me2jKehMabiyOikHUmHGHF6S6Q1OVnspEHv3HKbIO/yciHT8fOOuCnPCvD8GNyQ6nDsGr8jdgfmdoAuYwnzbLqe+3oytj/Q2mIqAAKe8pURtlz9WaQVdSHgvxQBNwDkdokrs53uFxl4/Bqrxnx/o9eaKLEa2CUbOz1u1X6rrXYmbMXAOqCXrDEVJ02EtEJwnQbmTuzn6FtBDkEX1hHjRXT5rU0VsyfktAMYviX+E1/1/VL27qNf4s76GIuEUiqXQm+Iy25tFO6xRMXI5XcyCnMza0s4tHAxygwSVigRWl6RSiXgMzaTTLEtGeRQAYs7elwitFGlMYjCAgQgQjMBqweyLn2uj5sbDg/owrDv5VzNBau4g=
 before_script: true
 script:
- - which adb
- - "./gradlew clean build"
-env:
-  global:
-    secure: br/q4aRjALtHvOMPRcmbUkA3tJxmcLeHjhGH3mxLOMHPSCAcV411xfP0HAWf/lUEJjRvmIKwy+yxkFL9yzzzJS+DmvFDhOXvHzvTwxJLKF+2g0aeR+c6BY/223Ai/I9wP6C8FW5aiL/O6ULer+fO8ikPaqaWzVRQb5KHVK5BChg5mjlcuVhDEtigNyLZft4Yhe041k+UAHoVDT73ONAZ6Rhsvk0MhkXXKAj1L8VC517rNEM4I0VF/VjFpKNOr4f1flwskOSXbHaXHejTOm5jdK1IA67TlGPmv/AFnBnBfCj/eG1sspcj9eahVnOVqIIRiSw+k49dBpCNkippF4wdaioDIpu9Lt1pHTk2l8ouWJFBLkVWINApznE2mGuNEq1u5dvDYvaxMiSZbTJaGjEWZmPBwynXjUNBQQOd53AcYZPBUp8djemEy5QSZpUZ4Ck3d1qn8e69TVrFIodoedqo6u+DVZ+6CPxTf2tFW0QLKmhy70qeHIP7ZLmQ0g7TgCAIM89mcMm/G5Hcb3Cnre0jcKQbDW52RuwMIwBbtS2oi1O3n0wGA71jKvvH5/o3OqAN5HhT+/pndtD3oqn5y4vB14JUla8TFYKuL02AST7bDRWpwdinXK3CZlsAr+xx2RvjyTpa3FSCW7YhMToVl+ZsY5h6EDdlbcv/Ui57uXAIrq8=
+- which adb
+- "./gradlew clean build"

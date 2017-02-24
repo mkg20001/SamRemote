@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "mkg20001.net.samremote"
         minSdkVersion 23
@@ -27,9 +27,9 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.support:wearable:2.0.0-alpha2'
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.android.support:multidex:+'
+    compile 'com.google.android.support:wearable:2.0.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:multidex:1.0.1'
     compile project(':samremotecommon')
 }

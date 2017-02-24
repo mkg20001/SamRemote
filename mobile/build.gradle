@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25"
+    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "mkg20001.net.samremote"
         minSdkVersion 21
@@ -33,8 +33,8 @@ dependencies {
     })
     compile project(':samremotecommon')
     //wearApp project(':wear')
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:multidex:1.0.1'
     testCompile 'junit:junit:4.12'
 }
