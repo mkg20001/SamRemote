@@ -26,8 +26,8 @@ deploy:
   provider: releases
   file_glob: true
   file:
-    - */build/outputs/apk/*
-    - */build/outputs/lint-results-*.*/*
+  - ./*/build/outputs/apk/*
+  - ./*/build/outputs/lint-results-*.*/*
   skip_cleanup: true
   on:
     tags: true
