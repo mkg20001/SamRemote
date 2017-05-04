@@ -23,7 +23,6 @@ import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import mkg20001.net.samremotecommon.PushButton;
@@ -99,8 +98,6 @@ public class Remote extends WearableActivity implements RemoteHelperView {
         setAmbientEnabled();
 
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
-        mTextView = (TextView) findViewById(R.id.text);
-        mClockView = (TextView) findViewById(R.id.clock);
 
         checkForDebugMode();
 
@@ -271,14 +268,8 @@ public class Remote extends WearableActivity implements RemoteHelperView {
     private void updateDisplay() {
         if (isAmbient()) {
             mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
-            mTextView.setTextColor(getResources().getColor(android.R.color.white));
-            mClockView.setVisibility(View.VISIBLE);
-
-            mClockView.setText(AMBIENT_DATE_FORMAT.format(new Date()));
         } else {
             mContainerView.setBackground(null);
-            mTextView.setTextColor(getResources().getColor(android.R.color.black));
-            mClockView.setVisibility(View.GONE);
         }
     }
 }
