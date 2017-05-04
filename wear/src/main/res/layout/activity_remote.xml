@@ -24,14 +24,6 @@
         <include layout="@layout/pad_volch"
             android:id="@+id/volch" />
 
-        <TextView
-            android:id="@+id/clock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:textColor="@android:color/white"
-            app:layout_box="all" />
-
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
