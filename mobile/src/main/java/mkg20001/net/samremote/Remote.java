@@ -39,7 +39,6 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
     public boolean getDebug() {
         return isDebug;
     }
-    private Integer curState=0;
     private boolean isOffline=true;
     private static ColorFilter whiteFilter=Tools.filter();
     @Override
@@ -225,7 +224,6 @@ public class Remote extends AppCompatActivity implements RemoteHelperView {
                         Tools.log("Image set to "+objects[0]);
                         int id=(int) objects[1];
                         stat.setText(id);
-                        curState++;
                     }
                 }));
             }

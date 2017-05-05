@@ -13,8 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.wearable.activity.WearableActivity;
-import android.support.wearable.view.BoxInsetLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.Formatter;
 import android.view.View;
 import android.widget.TextView;
@@ -22,23 +21,14 @@ import android.widget.TextView;
 import net.nodestyle.events.EventEmitter;
 import net.nodestyle.events.EventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 import mkg20001.net.samremotecommon.PushButton;
 import mkg20001.net.samremotecommon.RC;
 import mkg20001.net.samremotecommon.RemoteHelper;
 import mkg20001.net.samremotecommon.RemoteHelperView;
 import mkg20001.net.samremotecommon.Tools;
 
-public class Remote extends WearableActivity implements RemoteHelperView {
+public class Remote extends AppCompatActivity implements RemoteHelperView {
 
-    private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
-            new SimpleDateFormat("HH:mm", Locale.US);
-
-    private BoxInsetLayout mContainerView;
-    private TextView mTextView;
-    private TextView mClockView;
     private static ColorFilter whiteFilter=Tools.filter();
 
     /* implements */
@@ -49,7 +39,6 @@ public class Remote extends WearableActivity implements RemoteHelperView {
     public boolean getDebug() {
         return isDebug;
     }
-    private Integer curState=0;
     private boolean isOffline=true;
     @Override
     public void setOffline(boolean s) {
@@ -95,9 +84,6 @@ public class Remote extends WearableActivity implements RemoteHelperView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remote);
-        setAmbientEnabled();
-
-        mContainerView = (BoxInsetLayout) findViewById(R.id.container);
 
         checkForDebugMode();
 
@@ -229,7 +215,6 @@ public class Remote extends WearableActivity implements RemoteHelperView {
                         Tools.log("Image set to "+objects[0]);
                         stat.setText((int) objects[1]);
                         icon.setColorFilter(R.color.light);
-                        curState++;
                     }
                 }));
             }
@@ -245,31 +230,5 @@ public class Remote extends WearableActivity implements RemoteHelperView {
 
     public String getIP() {
         return Remote.this.getPreferences(Context.MODE_PRIVATE).getString("last_ip", "127.0.0.1");
-    }
-
-    @Override
-    public void onEnterAmbient(Bundle ambientDetails) {
-        super.onEnterAmbient(ambientDetails);
-        updateDisplay();
-    }
-
-    @Override
-    public void onUpdateAmbient() {
-        super.onUpdateAmbient();
-        updateDisplay();
-    }
-
-    @Override
-    public void onExitAmbient() {
-        updateDisplay();
-        super.onExitAmbient();
-    }
-
-    private void updateDisplay() {
-        if (isAmbient()) {
-            mContainerView.setBackgroundColor(getResources().getColor(android.R.color.black));
-        } else {
-            mContainerView.setBackground(null);
-        }
     }
 }
