@@ -3,7 +3,7 @@
 
 Control your Samsung TV with SamRemote
 
-Note: This App uses WiFI **NOT IR**
+Note: This App uses WiFI **not Infrared**
 
 ## Buttons
 Navigation: Up, Down, Left, Right
