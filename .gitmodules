@@ -1,3 +1,3 @@
 [submodule "nodestyle"]
 	path = nodestyle
-	url = https://github.com/mkg20001/nodestyle
+	url = ../../mkg20001/nodestyle
