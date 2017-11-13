@@ -3,7 +3,7 @@ android:
   components:
   - platform-tools,tools
   - extra-google-m2repository
-  - build-tools-26.0.1
+  - build-tools-26.0.2
   - extra-google-google_play_services,addon-google_apis-google-24
   - android-21,android-22,android-23,android-24,android-25,android-26,android-27
   licenses:
