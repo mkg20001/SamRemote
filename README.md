@@ -5,6 +5,10 @@ Control your Samsung TV with SamRemote
 
 Note: This App uses WiFI **not Infrared**
 
+[<img src="https://f-droid.org/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="90">](https://f-droid.org/packages/mkg20001.net.samremote/)
+
 ## Buttons
 Navigation: Up, Down, Left, Right
 Special: Power Off, Source, HDMI, Channel List, Menu
