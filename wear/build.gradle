@@ -8,8 +8,8 @@ android {
         applicationId "mkg20001.net.samremote"
         minSdkVersion 25
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 10100
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         // Enabling multidex support.
         multiDexEnabled true
